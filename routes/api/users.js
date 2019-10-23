@@ -11,8 +11,8 @@ router
 router
   .route("/:id")
   .get(userController.findById)
-  .create(userController.create)
-  .put(userController.findOneAndUpdate)
+  .post(userController.create)
+  .put(userController.update)
   .delete(userController.remove);
 
 module.exports = router;
