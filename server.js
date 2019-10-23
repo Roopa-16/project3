@@ -30,7 +30,6 @@ const MONGODB_URI =
 
 mongoose.connect(MONGODB_URI);
 // Define API routes here
-require("./controllers/testRoutes")(app);
 
 server.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
