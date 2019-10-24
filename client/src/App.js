@@ -5,9 +5,13 @@ import Closet from "./Views/Closet";
 import Home from "./Views/Home";
 import LogIn from "./Views/LogIn";
 import SignUp from "./Views/SignUp";
-import Outfit from "./Views/OutFit";
+import Outfit from "./Views/Outfit";
 import Nav from "./Components/Nav";
+import Footer from "./Components/Footer";
 import NoMatch from "./Views/NoMatch";
+import ClothingDetail from "./Views/ClothingDetail";
+import "./normalize.css";
+import "./App.css";
 
 function App() {
   return (
@@ -16,14 +20,18 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/" component={LogIn} />
+          <Route exact path="/LogIn" component={LogIn} />
           <Route exact path="/About" component={About} />
           <Route exact path="/Home" component={Home} />
           <Route exact path="/SignUp" component={SignUp} />
           <Route exact path="/Closet" component={Closet} />
+          <Route exact path="/ClothingDetail" component={ClothingDetail} />
           <Route exact path="/Outfit" component={Outfit} />
-          <Route exact path="/Closet/:id" component={Closet} />
+          <Route path="/ClothingDetail/:clothingType" component={Closet} />
+          <Route path="/Closet/:id" component={Closet} />
           <Route component={NoMatch} />
         </Switch>
+        {/* <Footer /> */}
       </div>
     </Router>
   );
