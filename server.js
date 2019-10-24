@@ -36,22 +36,22 @@ server.listen(PORT, () => {
 });
 
 // socket subscription sends a response from the server after an initial subscritpion (emit SubscribeToBookFeed) at an interval defined in the BookFeed utility
-let interval;
-io.on("connection", socket => {
-  console.log("New client connected");
-  if (interval) {
-    clearInterval(interval);
-  }
-  socket.on("subscribeToClosetFeed", interval => {
-    console.log(
-      "client is subscribing to closet feed with interval ",
-      interval
-    );
-    setInterval(() => {
-      sockMethods.getClosetFeed(socket, PORT);
-    }, interval);
-  });
-  socket.on("disconnect", () => {
-    console.log("Client disconnected");
-  });
-});
+// let interval;
+// io.on("connection", socket => {
+//   console.log("New client connected");
+//   if (interval) {
+//     clearInterval(interval);
+//   }
+//   socket.on("subscribeToClosetFeed", interval => {
+//     console.log(
+//       "client is subscribing to closet feed with interval ",
+//       interval
+//     );
+//     setInterval(() => {
+//       sockMethods.getClosetFeed(socket, PORT);
+//     }, interval);
+//   });
+//   socket.on("disconnect", () => {
+//     console.log("Client disconnected");
+//   });
+// });
