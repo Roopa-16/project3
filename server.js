@@ -25,10 +25,6 @@ app.use(routes);
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/styleFish");
 
-const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlinesFinal";
-
-mongoose.connect(MONGODB_URI);
 // Define API routes here
 
 server.listen(PORT, () => {
