@@ -60,35 +60,41 @@ class Home extends Component {
           </Col>
           <Col size="md-6">
             <h2>Bottom</h2>
-            <ClothingItem
-              imageURL={
-                this.state.bottoms.length
-                  ? this.state.bottoms[0].imageURL
-                  : "no-image"
-              }
-            />
+            <Link to="/ClothingDetail/Bottoms">
+              <ClothingItem
+                imageURL={
+                  this.state.bottoms.length
+                    ? this.state.bottoms[0].imageURL
+                    : "no-image"
+                }
+              />
+            </Link>
           </Col>
         </Row>
         <Row>
           <Col size="md-6">
             <h2>Outerwear</h2>
-            <ClothingItem
-              imageURL={
-                this.state.outerwear.length
-                  ? this.state.outerwear[0].imageURL
-                  : "no-image"
-              }
-            />
+            <Link to="/ClothingDetail/Outerwear">
+              <ClothingItem
+                imageURL={
+                  this.state.outerwear.length
+                    ? this.state.outerwear[0].imageURL
+                    : "no-image"
+                }
+              />
+            </Link>
           </Col>
           <Col size="md-6">
             <h2>Shoe</h2>
-            <ClothingItem
-              imageURL={
-                this.state.shoes.length
-                  ? this.state.shoes[0].imageURL
-                  : "no-image"
-              }
-            />
+            <Link to="/ClothingDetail/Shoes">
+              <ClothingItem
+                imageURL={
+                  this.state.shoes.length
+                    ? this.state.shoes[0].imageURL
+                    : "no-image"
+                }
+              />
+            </Link>
           </Col>
         </Row>
       </Container>

@@ -6,6 +6,7 @@ import { Col, Row, Container } from "../../Components/Grid";
 import { List, ListItem } from "../../Components/List";
 import { Input, TextArea, FormBtn } from "../../Components/Form";
 import ClothingItem from "../../Components/ClothingItem";
+
 class ClothingDetail extends Component {
   state = {
     clothingType: "",
@@ -14,6 +15,7 @@ class ClothingDetail extends Component {
     shoes: [],
     outerwear: []
   };
+  clothingType = this.state.clothingType;
 
   componentDidMount() {
     let params = this.props.match.params.clothingType;
@@ -75,7 +77,6 @@ class ClothingDetail extends Component {
       default:
         this.setState({ clothingType: "Default" });
     }
-    return clothingType;
   }
 
   render() {
@@ -90,13 +91,187 @@ class ClothingDetail extends Component {
         <Container>
           <Row>
             <Col size="md-6">
-              {this.clothingType == "Tops" ? "tops!" : "not tops"}
+              {this.state.clothingType == "Tops" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.tops.length
+                        ? this.state.tops[0].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : this.state.clothingType == "Bottoms" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.bottoms.length
+                        ? this.state.bottoms[0].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : this.state.clothingType == "Outerwear" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.outerwear.length
+                        ? this.state.outerwear[0].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : this.state.clothingType == "Shoes" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.shoes.length
+                        ? this.state.shoes[0].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : (
+                "clothing item not found"
+              )}
             </Col>
-            <Col size="md-6">Shirt/Pant/Outerwear/Shoe 2</Col>
+            <Col size="md-6">
+              {this.state.clothingType == "Tops" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.tops.length
+                        ? this.state.tops[1].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : this.state.clothingType == "Bottoms" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.bottoms.length
+                        ? this.state.bottoms[1].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : this.state.clothingType == "Outerwear" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.outerwear.length
+                        ? this.state.outerwear[1].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : this.state.clothingType == "Shoes" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.shoes.length
+                        ? this.state.shoes[1].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : (
+                "clothing item not found"
+              )}
+            </Col>
           </Row>
           <Row>
-            <Col size="md-6">Shirt/Pant/Outerwear/Shoe 3</Col>
-            <Col size="md-6">Shirt/Pant/Outerwear/Shoe 4</Col>
+            <Col size="md-6">
+              {this.state.clothingType == "Tops" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.tops.length
+                        ? this.state.tops[2].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : this.state.clothingType == "Bottoms" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.bottoms.length
+                        ? this.state.bottoms[2].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : this.state.clothingType == "Outerwear" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.outerwear.length
+                        ? this.state.outerwear[2].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : this.state.clothingType == "Shoes" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.shoes.length
+                        ? this.state.shoes[2].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : (
+                "clothing item not found"
+              )}
+            </Col>
+            <Col size="md-6">
+              {this.state.clothingType == "Tops" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.tops.length
+                        ? this.state.tops[3].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : this.state.clothingType == "Bottoms" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.bottoms.length
+                        ? this.state.bottoms[3].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : this.state.clothingType == "Outerwear" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.outerwear.length
+                        ? this.state.outerwear[3].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : this.state.clothingType == "Shoes" ? (
+                <Link to="/Outfit">
+                  <ClothingItem
+                    imageURL={
+                      this.state.shoes.length
+                        ? this.state.shoes[3].imageURL
+                        : "no-image"
+                    }
+                  />
+                </Link>
+              ) : (
+                "clothing item not found"
+              )}
+            </Col>
           </Row>
         </Container>
         <Row>
