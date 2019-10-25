@@ -2,8 +2,17 @@ import axios from "axios";
 
 export default {
   // Gets all books
-  getClothes: function() {
-    return axios.get("/api/clothes");
+  getTops: function() {
+    return axios.get("/api/clothes/tops");
+  },
+  getShoes: function() {
+    return axios.get("/api/clothes/shoes");
+  },
+  getOuterwear: function() {
+    return axios.get("/api/clothes/outerwear");
+  },
+  getBottoms: function() {
+    return axios.get("/api/clothes/bottoms");
   }
   // Gets the book with the given id
   // searchBook: function(bookTitle) {
