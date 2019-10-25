@@ -28,14 +28,10 @@ class About extends Component {
           <Col size="md-12">
             <h2>Swimmin' Styles</h2>
             <p>
-              Deutsches Ipsum Dolor quo Guten Tag posidonium Handschuh adhuc
-              Rotwurst sadipscing Bezirksschornsteinfegermeister at, Rotwurst
-              mei Brezel gloriatur. Vorsprung durch Technik inermis
-              Entschuldigung accommodare Schadenfreude Id Projektplanung assum
-              Ampelmännchen te Handtasche erroribus Zauberer Nec Die Toten Hosen
-              amet Aufenthaltsgenehmigung iriure, Zeitgeist gloriatur was machst
-              du ut. Freude schöner Götterfunken virtute Herr Doktor per Bier At
-              HugoClub Mate scaevola Sauerkraut An Die Ärzte malorum zu spät ius
+              Welcome to StyleFish! WE help you pick out an outfit based on 
+              what clothing you choose and the color along with it. Do you need 
+              an outfit for an occassion? That's okay!!! We automaticallly 
+              generate an outfit for each style.
             </p>
           </Col>
         </Row>
