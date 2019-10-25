@@ -14,7 +14,15 @@ export default {
   getBottoms: function() {
     return axios.get("/api/clothes/bottoms");
   }
-  // Gets the book with the given id
+  // getAll: function(array) {
+  //   return axios
+  //     .get("/api/clothes/tops")
+  //     .then(res => array.push(res))
+  //     .then(axios.get("/api/clothes/shoes").then(res => array.push(res)))
+  //     .then(axios.get("/api/clothes/outerwear").then(res => array.push(res)))
+  //     .then(axios.get("/api/clothes/bottoms").then(res => array.push(res)));
+  // },
+  // // Gets the book with the given id
   // searchBook: function(bookTitle) {
   //   return axios.get(
   //     `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&maxResults=10`

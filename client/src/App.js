@@ -27,6 +27,7 @@ function App() {
           <Route exact path="/Closet" component={Closet} />
           <Route exact path="/ClothingDetail" component={ClothingDetail} />
           <Route exact path="/Outfit" component={Outfit} />
+          <Route path="/Outfit/:id" component={Outfit} />
           <Route
             path="/ClothingDetail/:clothingType"
             component={ClothingDetail}

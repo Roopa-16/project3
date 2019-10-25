@@ -8,11 +8,6 @@ import { Input, TextArea, FormBtn } from "../../Components/Form";
 import ClothingItem from "../../Components/ClothingItem";
 
 class Home extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.loadClothes();
-  // }
-
   state = {
     tops: [],
     bottoms: [],

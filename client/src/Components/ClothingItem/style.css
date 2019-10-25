@@ -1,0 +1,9 @@
+.fitContainer {
+  width: 100%;
+  height: auto;
+}
+
+.border {
+  margin: 5px;
+  border: black solid 2px;
+}
