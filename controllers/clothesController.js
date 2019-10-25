@@ -14,7 +14,6 @@ module.exports = {
   },
   findAllTops: function(req, res) {
     db.Top.find(req.query)
-      .populate("color")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
