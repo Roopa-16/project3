@@ -8,43 +8,43 @@ const outerwear = [
     type: "hoodie",
     color: "blank",
     opacity: "blank",
-    imageURL: ""
+    imageURL: "outerwear/clear.png"
   },
   {
     type: "hoodie",
     color: "red",
     opacity: "light",
-    imageURL: ""
+    imageURL: "outerwear/light-red.png"
   },
   {
     type: "hoodie",
     color: "red",
     opacity: "dark",
-    imageURL: ""
+    imageURL: "outerwear/red.png"
   },
   {
     type: "hoodie",
     color: "blue",
     opacity: "light",
-    imageURL: ""
+    imageURL: "outerwear/light-blue.png"
   },
   {
     type: "hoodie",
     color: "blue",
     opacity: "dark",
-    imageURL: ""
+    imageURL: "outerwear/blue.png"
   },
   {
     type: "hoodie",
     color: "green",
     opacity: "light",
-    imageURL: ""
+    imageURL: "outerwear/light-green.png"
   },
   {
     type: "hoodie",
     color: "green",
     opacity: "dark",
-    imageURL: ""
+    imageURL: "outerwear/green.png"
   }
 ];
 
@@ -53,43 +53,43 @@ const tops = [
     type: "short-sleeve",
     color: "blank",
     opacity: "blank",
-    imageURL: ""
+    imageURL: "tops/clear.png"
   },
   {
     type: "short-sleeve",
     color: "red",
     opacity: "light",
-    imageURL: ""
+    imageURL: "tops/light-red.png"
   },
   {
     type: "short-sleeve",
     color: "red",
     opacity: "dark",
-    imageURL: ""
+    imageURL: "tops/red.png"
   },
   {
     type: "short-sleeve",
     color: "blue",
     opacity: "light",
-    imageURL: ""
+    imageURL: "tops/light-blue.png"
   },
   {
     type: "short-sleeve",
     color: "blue",
     opacity: "dark",
-    imageURL: ""
+    imageURL: "tops/blue.png"
   },
   {
     type: "short-sleeve",
     color: "green",
     opacity: "light",
-    imageURL: ""
+    imageURL: "tops/light-green.png"
   },
   {
     type: "short-sleeve",
     color: "green",
     opacity: "dark",
-    imageURL: ""
+    imageURL: "tops/green.png"
   }
 ];
 
@@ -98,43 +98,43 @@ const bottoms = [
     type: "joggers",
     color: "blank",
     opacity: "blank",
-    imageURL: ""
+    imageURL: "bottoms/clear.png"
   },
   {
     type: "joggers",
     color: "red",
     opacity: "light",
-    imageURL: ""
+    imageURL: "bottoms/light-red.png"
   },
   {
     type: "joggers",
     color: "red",
     opacity: "dark",
-    imageURL: ""
+    imageURL: "bottoms/red.png"
   },
   {
     type: "joggers",
     color: "blue",
     opacity: "light",
-    imageURL: ""
+    imageURL: "bottoms/light-blue.png"
   },
   {
     type: "joggers",
     color: "blue",
     opacity: "dark",
-    imageURL: ""
+    imageURL: "bottoms/blue.png"
   },
   {
     type: "joggers",
     color: "green",
     opacity: "light",
-    imageURL: ""
+    imageURL: "bottoms/light-green.png"
   },
   {
     type: "joggers",
     color: "green",
     opacity: "dark",
-    imageURL: ""
+    imageURL: "bottoms/green.png"
   }
 ];
 
@@ -143,43 +143,43 @@ const shoes = [
     type: "sneakers",
     color: "blank",
     opacity: "blank",
-    imageURL: ""
+    imageURL: "shoes/clear.png"
   },
   {
     type: "sneakers",
     color: "red",
     opacity: "light",
-    imageURL: ""
+    imageURL: "shoes/light-red.png"
   },
   {
     type: "sneakers",
     color: "red",
     opacity: "dark",
-    imageURL: ""
+    imageURL: "shoes/red.png"
   },
   {
     type: "sneakers",
     color: "blue",
     opacity: "light",
-    imageURL: ""
+    imageURL: "shoes/light-blue.png"
   },
   {
     type: "sneakers",
     color: "blue",
     opacity: "dark",
-    imageURL: ""
+    imageURL: "shoes/blue.png"
   },
   {
     type: "sneakers",
     color: "green",
     opacity: "light",
-    imageURL: ""
+    imageURL: "shoes/light-green.png"
   },
   {
     type: "sneakers",
     color: "green",
     opacity: "dark",
-    imageURL: ""
+    imageURL: "shoes/green.png"
   }
 ];
 

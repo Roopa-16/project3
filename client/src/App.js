@@ -27,7 +27,11 @@ function App() {
           <Route exact path="/Closet" component={Closet} />
           <Route exact path="/ClothingDetail" component={ClothingDetail} />
           <Route exact path="/Outfit" component={Outfit} />
-          <Route path="/ClothingDetail/:clothingType" component={Closet} />
+          <Route path="/Outfit/:id" component={Outfit} />
+          <Route
+            path="/ClothingDetail/:clothingType"
+            component={ClothingDetail}
+          />
           <Route path="/Closet/:id" component={Closet} />
           <Route component={NoMatch} />
         </Switch>
