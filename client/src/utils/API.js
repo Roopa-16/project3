@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default {
-  // Gets all books
+  // Gets all
   getTops: function() {
     return axios.get("/api/clothes/tops");
   },
@@ -13,7 +13,22 @@ export default {
   },
   getBottoms: function() {
     return axios.get("/api/clothes/bottoms");
+  },
+
+  // Get one
+  getTopById: function(id) {
+    return axios.get(`/api/clothes/tops/${id}`);
+  },
+  getShoeById: function(id) {
+    return axios.get(`/api/clothes/shoes/${id}`);
+  },
+  getOneOuterwearById: function(id) {
+    return axios.get(`/api/clothes/outerwear/${id}`);
+  },
+  getBottomById: function(id) {
+    return axios.get(`/api/clothes/bottoms/${id}`);
   }
+
   // getAll: function(array) {
   //   return axios
   //     .get("/api/clothes/tops")
