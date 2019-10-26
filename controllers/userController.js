@@ -28,13 +28,17 @@ module.exports = {
             .then(dbModel => res.json({
               message: "Welcome to Stylefish. Time to log in " + dbModel.username + "!"
             }))
-            .catch(err => res.status(422).json(err));
+            .catch(err => res.status(422).json({
+              message: "There was a problem with the database. (Error 422)"
+            }));
           } else {
             res.json({
               message: "This username is already taken."
             })
           }
-        }).catch(err => res.status(422).json(err));
+        }).catch(err => res.status(422).json({
+          message: "There was a problem with the database. (Error 422)"
+        }));
 
       } else {
         res.json({
@@ -42,12 +46,14 @@ module.exports = {
         })
       }
     
-    }).catch(err => res.status(422).json(err));
+    }).catch(err => res.status(422).json({
+      message: "There was a problem with the database. (Error 422)"
+    }));
   },
   update: function(req, res) {
     db.User.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .catch(err => res.status(422).json(err.message));
   },
   remove: function(req, res) {
     db.User.findById({ _id: req.params.id })
