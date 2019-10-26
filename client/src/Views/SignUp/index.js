@@ -27,37 +27,45 @@ class LogIn extends Component {
 
   // }
 
-  validateEmail = (email) => {
+  validateEmail = email => {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
-  }
+  };
 
-  handleFormSubmit = (userObj) => {
+  handleFormSubmit = userObj => {
     console.log(userObj);
-    API.createUser(userObj).then(function (response) {
-      alert(response.data.message);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    API.createUser(userObj)
+      .then(function(response) {
+        alert(response.data.message);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
   checkFormSubmit = event => {
     event.preventDefault();
-    if (this.state.userName.length > 8 && this.state.userPassword.length > 8) {
-      if(this.validateEmail(this.state.userEmail)){
-        if(this.state.userName.split("").includes(" ")){
-          alert("Username Can't contain spaces");
-        } else {
-          const newUser = {
-            email: this.state.userEmail,
-            username: this.state.userName,
-            password: this.state.userPassword
+    if (this.state.userName.length >= 8 && this.state.userPassword.length >= 8) {
+      if (!this.state.userPassword.split("").includes(" ")) {
+        if (
+          this.validateEmail(this.state.userEmail) &&
+          !this.state.userEmail.split("").includes(" ")
+        ) {
+          if (this.state.userName.split("").includes(" ")) {
+            alert("Username Can't contain spaces");
+          } else {
+            const newUser = {
+              email: this.state.userEmail,
+              username: this.state.userName,
+              password: this.state.userPassword
+            };
+            this.handleFormSubmit(newUser);
           }
-          this.handleFormSubmit(newUser);
+        } else {
+          alert("email is invalid");
         }
       } else {
-        alert("email is invalid");
+        alert("Password can't contain spaces.");
       }
     } else {
       alert("You password and username have to be at least 8 characters.");
