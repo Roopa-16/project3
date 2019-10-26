@@ -1,9 +1,21 @@
 import axios from "axios";
 
+
 export default {
   // Gets all books
   getClothes: function() {
     return axios.get("/api/clothes");
+  },
+
+  createUser: function(newUser) {
+    return axios({
+      method: 'post',
+      url: "/api/users",
+      data: newUser
+    });
+    
+    
+    
   }
   // Gets the book with the given id
   // searchBook: function(bookTitle) {
