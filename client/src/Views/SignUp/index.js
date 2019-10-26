@@ -32,12 +32,14 @@ class LogIn extends Component {
     return re.test(email);
   }
 
-  handleFormSubmit = event => {
-    event.preventDefault();
-    console.log("CLICKED IT");
-    console.log(this.state.userName);
-    console.log(this.state.userEmail);
-    console.log(this.state.userPassword);
+  handleFormSubmit = (userObj) => {
+    console.log(userObj);
+    API.createUser(userObj).then(function (response) {
+      alert(response.data.message);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   };
 
   checkFormSubmit = event => {
@@ -47,10 +49,12 @@ class LogIn extends Component {
         if(this.state.userName.split("").includes(" ")){
           alert("Username Can't contain spaces");
         } else {
-          alert("Success");
-          const userl = {
-            
+          const newUser = {
+            email: this.state.userEmail,
+            username: this.state.userName,
+            password: this.state.userPassword
           }
+          this.handleFormSubmit(newUser);
         }
       } else {
         alert("email is invalid");
