@@ -22,7 +22,12 @@ var OuterwearSchema = new Schema({
   opacity: {
     type: String,
     required: true
-  }
+  },
+    imageURL: {
+      type: String,
+      required: false,
+      default: "client/src/Views/assets/5.png"
+    }
 });
 
 // This creates our model from the above schema, using mongoose's model method

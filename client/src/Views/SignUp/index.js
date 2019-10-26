@@ -23,18 +23,42 @@ class LogIn extends Component {
     });
   };
 
-  //   handleFormSubmit = event => {
-  //     event.preventDefault();
-  //     if (this.state.title && this.state.author) {
-  //       API.saveBook({
-  //         title: this.state.title,
-  //         author: this.state.author,
-  //         synopsis: this.state.synopsis
-  //       })
-  //         .then(res => this.loadBooks())
-  //         .catch(err => console.log(err));
-  //     }
-  //   };
+  // handleFormSubmit = () => {
+
+  // }
+
+  validateEmail = (email) => {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    console.log("CLICKED IT");
+    console.log(this.state.userName);
+    console.log(this.state.userEmail);
+    console.log(this.state.userPassword);
+  };
+
+  checkFormSubmit = event => {
+    event.preventDefault();
+    if (this.state.userName.length > 8 && this.state.userPassword.length > 8) {
+      if(this.validateEmail(this.state.userEmail)){
+        if(this.state.userName.split("").includes(" ")){
+          alert("Username Can't contain spaces");
+        } else {
+          alert("Success");
+          const userl = {
+            
+          }
+        }
+      } else {
+        alert("email is invalid");
+      }
+    } else {
+      alert("You password and username have to be at least 8 characters.");
+    }
+  };
 
   render() {
     return (
@@ -47,7 +71,7 @@ class LogIn extends Component {
             value={this.state.userName}
             onChange={this.handleInputChange}
             name="userName"
-            placeholder="Name (required)"
+            placeholder="Username (required)"
           />
           <Input
             value={this.state.userEmail}
@@ -60,10 +84,17 @@ class LogIn extends Component {
             onChange={this.handleInputChange}
             name="userPassword"
             placeholder="Password"
+            type="password"
           />
           <FormBtn
-            disabled={!(this.state.userEmail && this.state.userPassword)}
-            // onClick={this.handleFormSubmit}
+            disabled={
+              !(
+                this.state.userEmail &&
+                this.state.userPassword &&
+                this.state.userName
+              )
+            }
+            onClick={this.checkFormSubmit}
           >
             Log in
           </FormBtn>

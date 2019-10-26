@@ -22,6 +22,11 @@ var BottomSchema = new Schema({
   opacity: {
     type: String,
     required: true
+  },
+  imageURL: {
+    type: String,
+    required: false,
+    default: "client/src/Views/assets/3.png"
   }
 });
 

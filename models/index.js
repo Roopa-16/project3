@@ -1,5 +1,4 @@
 // Exporting an object containing all of our models
-
 module.exports = {
   Bottom: require("./Bottom/Bottom"),
   Outerwear: require("./Outerwear/Outerwear"),
