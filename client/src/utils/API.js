@@ -1,7 +1,19 @@
 import axios from "axios";
 
+
 export default {
   // Gets all books
+  getClothes: function() {
+    return axios.get("/api/clothes");
+  },
+
+  createUser: function(newUser) {
+    return axios({
+      method: 'post',
+      url: "/api/users",
+      data: newUser
+    })
+  },
   getTops: function() {
     return axios.get("/api/clothes/tops");
   },
@@ -14,6 +26,7 @@ export default {
   getBottoms: function() {
     return axios.get("/api/clothes/bottoms");
   }
+
   // getAll: function(array) {
   //   return axios
   //     .get("/api/clothes/tops")
@@ -35,5 +48,6 @@ export default {
   // // Saves a book to the database
   // saveBook: function(bookData) {
   //   return axios.post("/api/books", bookData);
-  // }
+  // } hello
+
 };
