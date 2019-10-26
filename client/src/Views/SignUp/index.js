@@ -48,7 +48,7 @@ class LogIn extends Component {
           alert("Username Can't contain spaces");
         } else {
           alert("Success");
-          const newUser = {
+          const user = {
             
           }
         }
