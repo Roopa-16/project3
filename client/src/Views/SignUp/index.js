@@ -23,18 +23,54 @@ class LogIn extends Component {
     });
   };
 
-  //   handleFormSubmit = event => {
-  //     event.preventDefault();
-  //     if (this.state.title && this.state.author) {
-  //       API.saveBook({
-  //         title: this.state.title,
-  //         author: this.state.author,
-  //         synopsis: this.state.synopsis
-  //       })
-  //         .then(res => this.loadBooks())
-  //         .catch(err => console.log(err));
-  //     }
-  //   };
+  // handleFormSubmit = () => {
+
+  // }
+
+  validateEmail = email => {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  };
+
+  handleFormSubmit = userObj => {
+    console.log(userObj);
+    API.createUser(userObj)
+      .then(function(response) {
+        alert(response.data.message);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
+
+  checkFormSubmit = event => {
+    event.preventDefault();
+    if (this.state.userName.length >= 8 && this.state.userPassword.length >= 8) {
+      if (!this.state.userPassword.split("").includes(" ")) {
+        if (
+          this.validateEmail(this.state.userEmail) &&
+          !this.state.userEmail.split("").includes(" ")
+        ) {
+          if (this.state.userName.split("").includes(" ")) {
+            alert("Username Can't contain spaces");
+          } else {
+            const newUser = {
+              email: this.state.userEmail,
+              username: this.state.userName,
+              password: this.state.userPassword
+            };
+            this.handleFormSubmit(newUser);
+          }
+        } else {
+          alert("email is invalid");
+        }
+      } else {
+        alert("Password can't contain spaces.");
+      }
+    } else {
+      alert("You password and username have to be at least 8 characters.");
+    }
+  };
 
   render() {
     return (
@@ -47,7 +83,7 @@ class LogIn extends Component {
             value={this.state.userName}
             onChange={this.handleInputChange}
             name="userName"
-            placeholder="Name (required)"
+            placeholder="Username (required)"
           />
           <Input
             value={this.state.userEmail}
@@ -60,10 +96,17 @@ class LogIn extends Component {
             onChange={this.handleInputChange}
             name="userPassword"
             placeholder="Password"
+            type="password"
           />
           <FormBtn
-            disabled={!(this.state.userEmail && this.state.userPassword)}
-            // onClick={this.handleFormSubmit}
+            disabled={
+              !(
+                this.state.userEmail &&
+                this.state.userPassword &&
+                this.state.userName
+              )
+            }
+            onClick={this.checkFormSubmit}
           >
             Log in
           </FormBtn>
