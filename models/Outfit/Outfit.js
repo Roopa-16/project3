@@ -10,30 +10,23 @@ var OutfitSchema = new Schema({
     type: String,
     default: ""
   },
-  top: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Top"
-    }
-  ],
-  bottom: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Bottom"
-    }
-  ],
-  shoe: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Shoe"
-    }
-  ],
-  outerwear: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Outerwear"
-    }
-  ]
+  top: {
+    type: Schema.Types.ObjectId,
+    ref: "Top"
+  },
+  bottom: {
+    type: Schema.Types.ObjectId,
+    ref: "Bottom"
+  },
+  shoe: {
+    type: Schema.Types.ObjectId,
+    ref: "Shoe"
+  },
+  outerwear: {
+    type: Schema.Types.ObjectId,
+    ref: "Outerwear"
+  }
+
   // The ref property links the ObjectId to the Outfit model
   // This allows us to populate the User with the associated Outfit
 });

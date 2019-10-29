@@ -7,6 +7,7 @@ import { List, ListItem } from "../../Components/List";
 import { Input, TextArea, FormBtn } from "../../Components/Form";
 import ClothingItem from "../../Components/ClothingItem";
 
+const hardCodedUserId = "5db75b79c9e53d19ad99b030";
 class Outfit extends Component {
   state = {
     clothingType: "",
@@ -22,6 +23,15 @@ class Outfit extends Component {
       outerwear: {}
     }
   };
+
+  componentDidMount() {
+    let idParams = this.props.match.params.id;
+    let clothingType = this.props.match.params.clothingType;
+    this.setState({ clothingType: clothingType });
+    this.loadClothingItem(clothingType, idParams, () => {
+      this.loadClothes();
+    });
+  }
 
   // get specific clothing item from id in URL path parameters
   loadClothingItem = (clothingType, idParams, cb) => {
@@ -139,15 +149,6 @@ class Outfit extends Component {
     cb();
   };
 
-  componentDidMount() {
-    let idParams = this.props.match.params.id;
-    let clothingType = this.props.match.params.clothingType;
-    this.setState({ clothingType: clothingType });
-    this.loadClothingItem(clothingType, idParams, () => {
-      this.loadClothes();
-    });
-  }
-
   render() {
     return (
       <Container fluid>
@@ -160,7 +161,7 @@ class Outfit extends Component {
               <button
                 onClick={() => {
                   this.createOutfit(() =>
-                    this.saveOutfit("5db75b79c9e53d19ad99b030", () =>
+                    this.saveOutfit(hardCodedUserId, () =>
                       alert(
                         " Check out http://localhost:3001/api/users to see users with associated outfits. If you did not enter a hardcoded user ID in the Outfit view line 165, then this won't work. Create a user (sign up) first. Checkout http://localhost:3001/api/users to see users with associated outfits and their i."
                       )
@@ -186,6 +187,14 @@ class Outfit extends Component {
                 }}
               >
                 DELETE ALL OUTFITS
+              </button>
+              &nbsp;
+              <button
+                onClick={() => {
+                  API.deleteAllOutfitsFromUser(hardCodedUserId);
+                }}
+              >
+                DELETE ALL OUTFITS FROM USER
               </button>
             </Col>
           </Row>
