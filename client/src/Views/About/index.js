@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import Jumbotron from "../../Components/Jumbotron";
-import API from "../../utils/API";
-import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../Components/Grid";
-import { List, ListItem } from "../../Components/List";
 
 class About extends Component {
   //   state = {};

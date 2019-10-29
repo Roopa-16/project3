@@ -5,7 +5,7 @@ import "./style.css";
 function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <Link to="/About" className="navbar-brand">
+      <Link to="/Home" className="navbar-brand">
         StyleFish Icon
       </Link>
       <div className="collapse navbar-collapse" id="navbarNav">

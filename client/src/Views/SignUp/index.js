@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import DeleteBtn from "../../Components/DeleteBtn";
 import Jumbotron from "../../Components/Jumbotron";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../../Components/Grid";
-import { List, ListItem } from "../../Components/List";
-import { Input, TextArea, FormBtn } from "../../Components/Form";
+import { Container } from "../../Components/Grid";
+import { Input, FormBtn } from "../../Components/Form";
 
 class LogIn extends Component {
   state = {
