@@ -91,7 +91,7 @@ class ClothingDetail extends Component {
         <Container>
           <Row>
             <Col size="md-6">
-              {this.state.clothingType == "Tops" ? (
+              {this.state.clothingType === "Tops" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.tops.length ? this.state.tops[0]._id : ""
@@ -105,7 +105,7 @@ class ClothingDetail extends Component {
                     }
                   />
                 </Link>
-              ) : this.state.clothingType == "Bottoms" ? (
+              ) : this.state.clothingType === "Bottoms" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.bottoms.length ? this.state.bottoms[0]._id : ""
@@ -119,7 +119,7 @@ class ClothingDetail extends Component {
                     }
                   />
                 </Link>
-              ) : this.state.clothingType == "Outerwear" ? (
+              ) : this.state.clothingType === "Outerwear" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.outerwear.length
@@ -136,7 +136,7 @@ class ClothingDetail extends Component {
                     }
                   />
                 </Link>
-              ) : this.state.clothingType == "Shoes" ? (
+              ) : this.state.clothingType === "Shoes" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.shoes.length ? this.state.shoes[0]._id : ""
@@ -155,7 +155,7 @@ class ClothingDetail extends Component {
               )}
             </Col>
             <Col size="md-6">
-              {this.state.clothingType == "Tops" ? (
+              {this.state.clothingType === "Tops" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.tops.length ? this.state.tops[1]._id : ""
@@ -170,7 +170,7 @@ class ClothingDetail extends Component {
                     }
                   />
                 </Link>
-              ) : this.state.clothingType == "Bottoms" ? (
+              ) : this.state.clothingType === "Bottoms" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.bottoms.length ? this.state.bottoms[1]._id : ""
@@ -184,7 +184,7 @@ class ClothingDetail extends Component {
                     }
                   />
                 </Link>
-              ) : this.state.clothingType == "Outerwear" ? (
+              ) : this.state.clothingType === "Outerwear" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.outerwear.length
@@ -201,7 +201,7 @@ class ClothingDetail extends Component {
                     }
                   />
                 </Link>
-              ) : this.state.clothingType == "Shoes" ? (
+              ) : this.state.clothingType === "Shoes" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.shoes.length ? this.state.shoes[1]._id : ""
@@ -223,7 +223,7 @@ class ClothingDetail extends Component {
           </Row>
           <Row>
             <Col size="md-6">
-              {this.state.clothingType == "Tops" ? (
+              {this.state.clothingType === "Tops" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.tops.length ? this.state.tops[2]._id : ""
@@ -237,7 +237,7 @@ class ClothingDetail extends Component {
                     }
                   />
                 </Link>
-              ) : this.state.clothingType == "Bottoms" ? (
+              ) : this.state.clothingType === "Bottoms" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.bottoms.length ? this.state.bottoms[2]._id : ""
@@ -251,7 +251,7 @@ class ClothingDetail extends Component {
                     }
                   />
                 </Link>
-              ) : this.state.clothingType == "Outerwear" ? (
+              ) : this.state.clothingType === "Outerwear" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.outerwear.length
@@ -268,7 +268,7 @@ class ClothingDetail extends Component {
                     }
                   />
                 </Link>
-              ) : this.state.clothingType == "Shoes" ? (
+              ) : this.state.clothingType === "Shoes" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.shoes.length ? this.state.shoes[2]._id : ""
@@ -288,7 +288,7 @@ class ClothingDetail extends Component {
               )}
             </Col>
             <Col size="md-6">
-              {this.state.clothingType == "Tops" ? (
+              {this.state.clothingType === "Tops" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.tops.length ? this.state.tops[3]._id : ""
@@ -302,7 +302,7 @@ class ClothingDetail extends Component {
                     }
                   />
                 </Link>
-              ) : this.state.clothingType == "Bottoms" ? (
+              ) : this.state.clothingType === "Bottoms" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.bottoms.length ? this.state.bottoms[3]._id : ""
@@ -316,7 +316,7 @@ class ClothingDetail extends Component {
                     }
                   />
                 </Link>
-              ) : this.state.clothingType == "Outerwear" ? (
+              ) : this.state.clothingType === "Outerwear" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.outerwear.length
@@ -333,7 +333,7 @@ class ClothingDetail extends Component {
                     }
                   />
                 </Link>
-              ) : this.state.clothingType == "Shoes" ? (
+              ) : this.state.clothingType === "Shoes" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
                     this.state.shoes.length ? this.state.shoes[3]._id : ""
