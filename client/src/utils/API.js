@@ -1,8 +1,6 @@
 import axios from "axios";
 
-
 export default {
-
   // Gets all
   getClothes: function() {
     return axios.get("/api/clothes");
@@ -10,10 +8,10 @@ export default {
 
   createUser: function(newUser) {
     return axios({
-      method: 'post',
+      method: "post",
       url: "/api/users",
       data: newUser
-    })
+    });
   },
   getTops: function() {
     return axios.get("/api/clothes/tops");
@@ -35,11 +33,18 @@ export default {
   getShoeById: function(id) {
     return axios.get(`/api/clothes/shoes/${id}`);
   },
-  getOneOuterwearById: function(id) {
+  getOuterwearById: function(id) {
     return axios.get(`/api/clothes/outerwear/${id}`);
   },
   getBottomById: function(id) {
     return axios.get(`/api/clothes/bottoms/${id}`);
+  },
+
+  saveOutfit: function(userId, outfitObj) {
+    return axios.post(`/api/outfits/${userId}`, outfitObj);
+  },
+  deleteAllOutfits: function() {
+    return axios.delete(`/api/outfits`);
   }
 
   // getAll: function(array) {
@@ -64,5 +69,4 @@ export default {
   // saveBook: function(bookData) {
   //   return axios.post("/api/books", bookData);
   // } hello
-
 };

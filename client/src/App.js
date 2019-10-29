@@ -7,7 +7,7 @@ import LogIn from "./Views/LogIn";
 import SignUp from "./Views/SignUp";
 import Outfit from "./Views/Outfit";
 import Nav from "./Components/Nav";
-import Footer from "./Components/Footer";
+// import Footer from "./Components/Footer";
 import NoMatch from "./Views/NoMatch";
 import ClothingDetail from "./Views/ClothingDetail";
 import "./normalize.css";

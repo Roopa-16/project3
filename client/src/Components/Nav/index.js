@@ -46,7 +46,7 @@ function Nav() {
               Log in
             </Link>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link
               to="/ClothingDetail"
               className={
@@ -57,8 +57,8 @@ function Nav() {
             >
               Clothing Detail
             </Link>
-          </li>
-          <li className="nav-item">
+          </li> */}
+          {/* <li className="nav-item">
             <Link
               to="/Outfit"
               className={
@@ -69,7 +69,7 @@ function Nav() {
             >
               Outfit
             </Link>
-          </li>
+          </li> */}
           <li className="nav-item">
             <Link
               to="/About"
