@@ -11,10 +11,12 @@ class Closet extends Component {
   };
 
   componentDidMount() {
-    this.reloadOutfits();
+    this.reloadOutfits(hardCodedUserId);
+    let userId = this.props.match.params.id;
+    // we can get outfits from User ID in URL params
   }
 
-  reloadOutfits = () => {
+  reloadOutfits = hardCodedUserId => {
     this.setState({ outfits: [] });
     API.getUser(hardCodedUserId)
       .then(response => {
@@ -31,11 +33,37 @@ class Closet extends Component {
   render() {
     return (
       <>
-        <Container fluid>
+        <Container>
           <Jumbotron>
             <h1>My Closet</h1>
           </Jumbotron>
-          <Row>
+          <Row style={{ textAlign: "center" }}>
+            <Col size="md-6">
+              <button
+                type="button"
+                class="btn btn-danger"
+                onClick={() => {
+                  API.deleteAllOutfitsFromUser(hardCodedUserId).then(() =>
+                    this.reloadOutfits()
+                  );
+                }}
+              >
+                DELETE ALL OUTFITS FROM USER
+              </button>
+            </Col>
+            <Col size="md-6">
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() =>
+                  API.deleteAllOutfits().then(this.reloadOutfits())
+                }
+              >
+                ADMIN delete all outfits from DB
+              </button>
+            </Col>
+          </Row>
+          <Row className="justify-content-center">
             {" "}
             {this.state.outfits.map((outfit, index) => (
               <Col size="md-6">
@@ -70,26 +98,20 @@ class Closet extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col size="md-6">
+                  <Col size="md-6" className="text-center">
                     <button
+                      type="button"
+                      className="btn btn-danger"
                       onClick={() =>
                         API.deleteOneOutfit(outfit._id).then(
                           this.reloadOutfits()
                         )
                       }
                     >
-                      DELETE
+                      REMOVE
                     </button>
                   </Col>
-                  <Col size="md-6">
-                    <button
-                      onClick={() => {
-                        API.deleteAllOutfitsFromUser(hardCodedUserId);
-                      }}
-                    >
-                      DELETE ALL OUTFITS FROM USER
-                    </button>
-                  </Col>
+                  <Col size="md-6"></Col>
                 </Row>
               </Col>
             ))}
