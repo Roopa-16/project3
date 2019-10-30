@@ -14,6 +14,13 @@ export default {
       data: newUser
     })
   },
+  logUser: function(userDetails) {
+    return axios({
+      method: 'post',
+      url: "/api/login/",
+      data: userDetails
+    })
+  },
   getTops: function() {
     return axios.get("/api/clothes/tops");
   },

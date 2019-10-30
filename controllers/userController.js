@@ -1,8 +1,8 @@
 const db = require("../models");
-
+const jwt = require("jsonwebtoken");
 // Defining methods for the UsersController
 module.exports = {
-  findAll: function(req, res) {
+  findAll: function(req, res) { 
     db.User.find(req.query)
     .populate("outfits")
       .then(dbModel => res.json(dbModel))
