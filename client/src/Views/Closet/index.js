@@ -1,47 +1,123 @@
 import React, { Component } from "react";
 import Jumbotron from "../../Components/Jumbotron";
-import API from "../../utils/API";
-import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../Components/Grid";
-import { List, ListItem } from "../../Components/List";
-import { Input, TextArea, FormBtn } from "../../Components/Form";
+import ClothingItem from "../../Components/ClothingItem";
+import API from "../../utils/API";
+const hardCodedUserId = "5db75b79c9e53d19ad99b030";
 
 class Closet extends Component {
-  //   state = {};
+  state = {
+    outfits: []
+  };
 
-  //   componentDidMount() {
-  //     this.loadClothes();
-  //   }
+  componentDidMount() {
+    this.reloadOutfits(hardCodedUserId);
+    let userId = this.props.match.params.id;
+    // we can get outfits from User ID in URL params
+  }
 
-  //   loadClothes = () => {
-  //     API.getClothes()
-  //       .then(res => this.setState({ clothes: res.data }))
-  //       .catch(err => console.log(err));
-  //   };
+  reloadOutfits = hardCodedUserId => {
+    this.setState({ outfits: [] });
+    API.getUser(hardCodedUserId)
+      .then(response => {
+        response.data.outfits.map(el => {
+          API.getOutfit(el._id).then(res => {
+            console.log(res.data);
+            this.setState({ outfits: this.state.outfits.concat([res.data]) });
+          });
+        });
+      })
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
-      <Container fluid>
-        <Jumbotron>
-          <h1>My Closet</h1>
-        </Jumbotron>
-        <Row>
-          <Col size="md-6">
-            <h2>Outfit</h2>
-          </Col>
-          <Col size="md-6">
-            <h2>Outfit</h2>
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-6">
-            <h2>Outfit</h2>
-          </Col>
-          <Col size="md-6">
-            <h2>Outfit</h2>
-          </Col>
-        </Row>
-      </Container>
+      <>
+        <Container>
+          <Jumbotron>
+            <h1>My Closet</h1>
+          </Jumbotron>
+          <Row style={{ textAlign: "center" }}>
+            <Col size="md-6">
+              <button
+                type="button"
+                class="btn btn-danger"
+                onClick={() => {
+                  API.deleteAllOutfitsFromUser(hardCodedUserId).then(() =>
+                    this.reloadOutfits()
+                  );
+                }}
+              >
+                DELETE ALL OUTFITS FROM USER
+              </button>
+            </Col>
+            <Col size="md-6">
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() =>
+                  API.deleteAllOutfits().then(this.reloadOutfits())
+                }
+              >
+                ADMIN delete all outfits from DB
+              </button>
+            </Col>
+          </Row>
+          <Row className="justify-content-center">
+            {" "}
+            {this.state.outfits.map((outfit, index) => (
+              <Col size="md-6">
+                <Row>
+                  <Col size="md-6">
+                    {" "}
+                    <ClothingItem
+                      imageURL={outfit.top ? outfit.top.imageURL : ""}
+                    />
+                  </Col>
+                  <Col size="md-6">
+                    {" "}
+                    <ClothingItem
+                      imageURL={outfit.bottom ? outfit.bottom.imageURL : ""}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col size="md-6">
+                    {" "}
+                    <ClothingItem
+                      imageURL={
+                        outfit.outerwear ? outfit.outerwear.imageURL : ""
+                      }
+                    />
+                  </Col>
+                  <Col size="md-6">
+                    {" "}
+                    <ClothingItem
+                      imageURL={outfit.shoe ? outfit.shoe.imageURL : ""}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col size="md-6" className="text-center">
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={() =>
+                        API.deleteOneOutfit(outfit._id).then(
+                          this.reloadOutfits()
+                        )
+                      }
+                    >
+                      REMOVE
+                    </button>
+                  </Col>
+                  <Col size="md-6"></Col>
+                </Row>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </>
     );
   }
 }

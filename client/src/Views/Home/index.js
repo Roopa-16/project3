@@ -3,9 +3,9 @@ import Jumbotron from "../../Components/Jumbotron";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../Components/Grid";
-import { List, ListItem } from "../../Components/List";
-import { Input, TextArea, FormBtn } from "../../Components/Form";
 import ClothingItem from "../../Components/ClothingItem";
+import ClosetFeed from "../../Components/ClosetFeed";
+import "./style.css";
 
 class Home extends Component {
   state = {
@@ -38,11 +38,19 @@ class Home extends Component {
     return (
       <Container fluid>
         <Jumbotron>
-          <h1>Go fishing for style</h1>
+          <h1>Welcome to StyleFish!</h1>
         </Jumbotron>
-        <Row>
-          <Col size="md-6">
-            <h2>Top</h2>
+        <Row className="justify-content-center">
+          <ClosetFeed />
+        </Row>
+        <Row className="justify-content-center">
+          <p>
+            Select a clothing type to begin. Check out our{" "}
+            <Link to="/About">Information Page</Link> to learn more.
+          </p>
+        </Row>
+        <Row className="justify-content-center">
+          <Col size="md-3">
             <Link to="/ClothingDetail/Tops">
               <ClothingItem
                 imageURL={
@@ -53,8 +61,7 @@ class Home extends Component {
               />
             </Link>
           </Col>
-          <Col size="md-6">
-            <h2>Bottom</h2>
+          <Col size="md-3">
             <Link to="/ClothingDetail/Bottoms">
               <ClothingItem
                 imageURL={
@@ -66,9 +73,8 @@ class Home extends Component {
             </Link>
           </Col>
         </Row>
-        <Row>
-          <Col size="md-6">
-            <h2>Outerwear</h2>
+        <Row className="justify-content-center">
+          <Col size="md-3">
             <Link to="/ClothingDetail/Outerwear">
               <ClothingItem
                 imageURL={
@@ -79,8 +85,7 @@ class Home extends Component {
               />
             </Link>
           </Col>
-          <Col size="md-6">
-            <h2>Shoe</h2>
+          <Col size="md-3">
             <Link to="/ClothingDetail/Shoes">
               <ClothingItem
                 imageURL={

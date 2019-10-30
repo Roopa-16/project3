@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-import DeleteBtn from "../../Components/DeleteBtn";
 import Jumbotron from "../../Components/Jumbotron";
-import API from "../../utils/API";
 import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../../Components/Grid";
-import { List, ListItem } from "../../Components/List";
-import { Input, TextArea, FormBtn } from "../../Components/Form";
-
+import { Container, Row, Col } from "../../Components/Grid";
+import { Input, FormBtn } from "../../Components/Form";
 class LogIn extends Component {
   state = {
     userEmail: "",
@@ -57,33 +53,41 @@ class LogIn extends Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container>
         <Jumbotron>
-          <h1>LogIn</h1>
+          <h1>Log In</h1>
         </Jumbotron>
-        <form>
-          <Input
-            value={this.state.userEmail}
-            onChange={this.handleInputChange}
-            name="userEmail"
-            placeholder="Email Address"
-          />
-          <Input
-            value={this.state.userPassword}
-            onChange={this.handleInputChange}
-            name="userPassword"
-            placeholder="Password"
-            type="password"
-          />
-          <FormBtn
-            disabled={!(this.state.userEmail && this.state.userPassword)}
-            onClick={this.handleFormSubmit}
-          >
-            Log in
-          </FormBtn>
-        </form>
-        <p>Don't have an account? </p>
-        <Link to="/SignUp">Sign Up Here</Link>
+        <br />
+        <Row className="justify-content-center">
+          <Col size="md-6">
+            <form>
+              <Input
+                value={this.state.userEmail}
+                onChange={this.handleInputChange}
+                name="userEmail"
+                placeholder="Email Address"
+              />
+              <Input
+                value={this.state.userPassword}
+                onChange={this.handleInputChange}
+                name="userPassword"
+                placeholder="Password"
+              />
+              <FormBtn
+                disabled={!(this.state.userEmail && this.state.userPassword)}
+                // onClick={this.handleFormSubmit}
+              >
+                Log in
+              </FormBtn>
+            </form>
+
+            <p>
+              Don't have an account?
+              <br />
+              <Link to="/SignUp"> Sign Up Here</Link>{" "}
+            </p>
+          </Col>
+        </Row>
       </Container>
     );
   }
