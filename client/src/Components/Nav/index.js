@@ -4,9 +4,9 @@ import "./style.css";
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <Link to="/Home" className="navbar-brand">
-        StyleFish Icon
+    <nav className="navbar navbar-expand-lg navbar-light bg-primary">
+      <Link to="/Home" className="navbar-brand"> 
+      <img src="/assets/logoStyleFish.png" width="50px" height="50px" className="logo"></img>
       </Link>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">

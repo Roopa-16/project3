@@ -4,6 +4,7 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../Components/Grid";
 import ClothingItem from "../../Components/ClothingItem";
+import "./style.css";
 
 class Home extends Component {
   state = {
@@ -35,12 +36,13 @@ class Home extends Component {
   render() {
     return (
       <Container fluid>
-        <Jumbotron>
-          <h1>Go fishing for style</h1>
-        </Jumbotron>
+<Jumbotron>
+  <h1>Welcome to StyleFish!</h1>
+</Jumbotron>
         <Container>
           <Row>
-            <Col size="md-6">
+          <Col size="md-2"></Col>
+            <Col size="md-4">
               <h2>Top</h2>
               <Link to="/ClothingDetail/Tops">
                 <ClothingItem
@@ -52,7 +54,7 @@ class Home extends Component {
                 />
               </Link>
             </Col>
-            <Col size="md-6">
+            <Col size="md-4">
               <h2>Bottom</h2>
               <Link to="/ClothingDetail/Bottoms">
                 <ClothingItem
@@ -64,9 +66,12 @@ class Home extends Component {
                 />
               </Link>
             </Col>
+            <Col size="md-2"></Col>
           </Row>
+          <br/>
           <Row>
-            <Col size="md-6">
+          <Col size="md-2"></Col>
+            <Col size="md-4">
               <h2>Outerwear</h2>
               <Link to="/ClothingDetail/Outerwear">
                 <ClothingItem
@@ -78,7 +83,7 @@ class Home extends Component {
                 />
               </Link>
             </Col>
-            <Col size="md-6">
+            <Col size="md-4">
               <h2>Shoe</h2>
               <Link to="/ClothingDetail/Shoes">
                 <ClothingItem
@@ -90,6 +95,7 @@ class Home extends Component {
                 />
               </Link>
             </Col>
+            <Col size="md-2"></Col>
           </Row>
         </Container>
       </Container>

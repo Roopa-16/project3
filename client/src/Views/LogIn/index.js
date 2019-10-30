@@ -38,6 +38,7 @@ class LogIn extends Component {
         <Jumbotron>
           <h1>LogIn</h1>
         </Jumbotron>
+        <br/>
         <form>
           <Input
             value={this.state.userEmail}

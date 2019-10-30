@@ -83,12 +83,10 @@ class ClothingDetail extends Component {
         <Jumbotron>
           <h1>Clothing Detail</h1>
         </Jumbotron>
-        <Row>
-          <div className="col align-self-center">Choose your style</div>
-        </Row>
         <Container>
           <Row>
-            <Col size="md-6">
+          <Col size="md-2"></Col>
+            <Col size="md-4">
               {this.state.clothingType === "Tops" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
@@ -152,7 +150,7 @@ class ClothingDetail extends Component {
                 "clothing item not found"
               )}
             </Col>
-            <Col size="md-6">
+            <Col size="md-4">
               {this.state.clothingType === "Tops" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
@@ -218,9 +216,12 @@ class ClothingDetail extends Component {
                 "clothing item not found"
               )}
             </Col>
+            <Col size="md-2"></Col>
           </Row>
+          <br/>
           <Row>
-            <Col size="md-6">
+          <Col size="md-2"></Col>
+            <Col size="md-4">
               {this.state.clothingType === "Tops" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
@@ -285,7 +286,7 @@ class ClothingDetail extends Component {
                 "clothing item not found"
               )}
             </Col>
-            <Col size="md-6">
+            <Col size="md-4">
               {this.state.clothingType === "Tops" ? (
                 <Link
                   to={`/Outfit/${this.state.clothingType}/${
@@ -350,6 +351,7 @@ class ClothingDetail extends Component {
                 "clothing item not found"
               )}
             </Col>
+            <Col size="md-2"></Col>
           </Row>
         </Container>
       </Container>
