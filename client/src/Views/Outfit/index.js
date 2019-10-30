@@ -195,8 +195,8 @@ class Outfit extends Component {
                 imageURL={
                   this.state.top && this.state.clothingType === "Tops"
                     ? this.state.clothingItem.imageURL
-                    : this.state.tops
-                    ? this.state.tops.imageURL
+                    : this.state.top
+                    ? this.state.top.imageURL
                     : "error"
                 }
               />
