@@ -76,7 +76,7 @@ class Closet extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col size="md-12">
+                  <Col size="md-6">
                     <button
                       onClick={() =>
                         API.deleteOneOutfit(outfit._id).then(
@@ -85,6 +85,15 @@ class Closet extends Component {
                       }
                     >
                       DELETE
+                    </button>
+                  </Col>
+                  <Col size="md-6">
+                    <button
+                      onClick={() => {
+                        API.deleteAllOutfitsFromUser(hardCodedUserId);
+                      }}
+                    >
+                      DELETE ALL OUTFITS FROM USER
                     </button>
                   </Col>
                 </Row>

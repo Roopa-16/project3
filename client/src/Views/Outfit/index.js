@@ -180,22 +180,6 @@ class Outfit extends Component {
               >
                 FISH AGAIN
               </button>
-              &nbsp;
-              <button
-                onClick={() => {
-                  API.deleteAllOutfits();
-                }}
-              >
-                DELETE ALL OUTFITS
-              </button>
-              &nbsp;
-              <button
-                onClick={() => {
-                  API.deleteAllOutfitsFromUser(hardCodedUserId);
-                }}
-              >
-                DELETE ALL OUTFITS FROM USER
-              </button>
             </Col>
           </Row>
           <Row>
