@@ -17,14 +17,13 @@ class About extends Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container>
         <Jumbotron>
           <h1>About StyleFish</h1>
         </Jumbotron>
         <Row>
           <Col size="md-12">
-            <h2>Swimmin' Styles</h2>
-            <p>
+            <p style={{ textAlign: "center" }}>
               Deutsches Ipsum Dolor quo Guten Tag posidonium Handschuh adhuc
               Rotwurst sadipscing Bezirksschornsteinfegermeister at, Rotwurst
               mei Brezel gloriatur. Vorsprung durch Technik inermis

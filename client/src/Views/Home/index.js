@@ -4,6 +4,7 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../Components/Grid";
 import ClothingItem from "../../Components/ClothingItem";
+import ClosetFeed from "../../Components/ClosetFeed";
 import "./style.css";
 
 class Home extends Component {
@@ -36,68 +37,66 @@ class Home extends Component {
   render() {
     return (
       <Container fluid>
-<Jumbotron>
-  <h1>Welcome to StyleFish!</h1>
-</Jumbotron>
-        <Container>
-          <Row>
-          <Col size="md-2"></Col>
-            <Col size="md-4">
-              <h2>Top</h2>
-              <Link to="/ClothingDetail/Tops">
-                <ClothingItem
-                  imageURL={
-                    this.state.tops.length
-                      ? this.state.tops[0].imageURL
-                      : "no-image"
-                  }
-                />
-              </Link>
-            </Col>
-            <Col size="md-4">
-              <h2>Bottom</h2>
-              <Link to="/ClothingDetail/Bottoms">
-                <ClothingItem
-                  imageURL={
-                    this.state.bottoms.length
-                      ? this.state.bottoms[0].imageURL
-                      : "no-image"
-                  }
-                />
-              </Link>
-            </Col>
-            <Col size="md-2"></Col>
-          </Row>
-          <br/>
-          <Row>
-          <Col size="md-2"></Col>
-            <Col size="md-4">
-              <h2>Outerwear</h2>
-              <Link to="/ClothingDetail/Outerwear">
-                <ClothingItem
-                  imageURL={
-                    this.state.outerwear.length
-                      ? this.state.outerwear[0].imageURL
-                      : "no-image"
-                  }
-                />
-              </Link>
-            </Col>
-            <Col size="md-4">
-              <h2>Shoe</h2>
-              <Link to="/ClothingDetail/Shoes">
-                <ClothingItem
-                  imageURL={
-                    this.state.shoes.length
-                      ? this.state.shoes[0].imageURL
-                      : "no-image"
-                  }
-                />
-              </Link>
-            </Col>
-            <Col size="md-2"></Col>
-          </Row>
-        </Container>
+        <Jumbotron>
+          <h1>Welcome to StyleFish!</h1>
+        </Jumbotron>
+        <Row className="justify-content-center">
+          <ClosetFeed />
+        </Row>
+        <Row className="justify-content-center">
+          <p>
+            Select a clothing type to begin. Check out our{" "}
+            <Link to="/About">Information Page</Link> to learn more.
+          </p>
+        </Row>
+        <Row className="justify-content-center">
+          <Col size="md-3">
+            <Link to="/ClothingDetail/Tops">
+              <ClothingItem
+                imageURL={
+                  this.state.tops.length
+                    ? this.state.tops[0].imageURL
+                    : "no-image"
+                }
+              />
+            </Link>
+          </Col>
+          <Col size="md-3">
+            <Link to="/ClothingDetail/Bottoms">
+              <ClothingItem
+                imageURL={
+                  this.state.bottoms.length
+                    ? this.state.bottoms[0].imageURL
+                    : "no-image"
+                }
+              />
+            </Link>
+          </Col>
+        </Row>
+        <Row className="justify-content-center">
+          <Col size="md-3">
+            <Link to="/ClothingDetail/Outerwear">
+              <ClothingItem
+                imageURL={
+                  this.state.outerwear.length
+                    ? this.state.outerwear[0].imageURL
+                    : "no-image"
+                }
+              />
+            </Link>
+          </Col>
+          <Col size="md-3">
+            <Link to="/ClothingDetail/Shoes">
+              <ClothingItem
+                imageURL={
+                  this.state.shoes.length
+                    ? this.state.shoes[0].imageURL
+                    : "no-image"
+                }
+              />
+            </Link>
+          </Col>
+        </Row>
       </Container>
     );
   }

@@ -25,6 +25,10 @@ var OutfitSchema = new Schema({
   outerwear: {
     type: Schema.Types.ObjectId,
     ref: "Outerwear"
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User"
   }
 
   // The ref property links the ObjectId to the Outfit model

@@ -133,7 +133,8 @@ class Outfit extends Component {
           top: top,
           bottom: bottom,
           shoe: shoe,
-          outerwear: outerwear
+          outerwear: outerwear,
+          user: hardCodedUserId
         }
       }),
       () => cb()
@@ -148,104 +149,90 @@ class Outfit extends Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container>
         <Jumbotron>
           <h1>Your Outfit!</h1>
         </Jumbotron>
-        <Container>
-          <Row>
-            <Col size={"md-2"}></Col>
-            <Col size={"md-1"}>
-              <button
-                type="button"
-                class="btn btn-success"
-                onClick={() => {
-                  this.createOutfit(() =>
-                    this.saveOutfit(hardCodedUserId, () =>
-                      alert(
-                        " Check out http://localhost:3001/api/users to see users with associated outfits. If you did not enter a hardcoded user ID in the Outfit view line 165, then this won't work. Create a user (sign up) first. Checkout http://localhost:3001/api/users to see users with associated outfits and their i."
-                      )
+        <Row className="justify-content-center">
+          <Col size={"md-2"} className="text-center m-1">
+            <button
+              type="button"
+              class="btn btn-success"
+              onClick={() => {
+                this.createOutfit(() =>
+                  this.saveOutfit(hardCodedUserId, () =>
+                    alert(
+                      " Check out http://localhost:3001/api/users to see users with associated outfits. If you did not enter a hardcoded user ID in the Outfit view line 165, then this won't work. Create a user (sign up) first. Checkout http://localhost:3001/api/users to see users with associated outfits and their i."
                     )
-                  );
-                }}
-              >
-                SAVE OUTFIT
-              </button>
-            </Col>
-            <Col size={"md-2"}></Col>
-            <Col size={"md-1"}>
-              <button
-                type="button"
-                class="btn btn-danger"
-                onClick={() => {
-                  window.location.reload();
-                }}
-              >
-                FISH AGAIN
-              </button>
-            </Col>
-            <Col size={"md-2"}></Col>
-          </Row>
-          <br />
-          <Row>
-            <Col size={"md-2"}></Col>
-            <Col size="md-4">
-              <h2>Top</h2>
-              <ClothingItem
-                imageURL={
-                  this.state.top && this.state.clothingType === "Tops"
-                    ? this.state.clothingItem.imageURL
-                    : this.state.top
-                    ? this.state.top.imageURL
-                    : "error"
-                }
-              />
-            </Col>
-            <Col size="md-4">
-              <h2>Bottom</h2>{" "}
-              <ClothingItem
-                imageURL={
-                  this.state.bottom && this.state.clothingType === "Bottoms"
-                    ? this.state.clothingItem.imageURL
-                    : this.state.bottom
-                    ? this.state.bottom.imageURL
-                    : "error"
-                }
-              />
-            </Col>
-            <Col size={"md-2"}></Col>
-          </Row>
-          <br />
-          <Row>
-            <Col size={"md-2"}></Col>
-            <Col size="md-4">
-              <h2>Outerwear</h2>{" "}
-              <ClothingItem
-                imageURL={
-                  this.state.outerwear &&
-                  this.state.clothingType === "Outerwear"
-                    ? this.state.clothingItem.imageURL
-                    : this.state.outerwear
-                    ? this.state.outerwear.imageURL
-                    : "error"
-                }
-              />
-            </Col>
-            <Col size="md-4">
-              <h2>Shoe</h2>{" "}
-              <ClothingItem
-                imageURL={
-                  this.state.shoe && this.state.clothingType === "Shoes"
-                    ? this.state.clothingItem.imageURL
-                    : this.state.shoe
-                    ? this.state.shoe.imageURL
-                    : "error"
-                }
-              />
-            </Col>
-            <Col size={"md-2"}></Col>
-          </Row>
-        </Container>
+                  )
+                );
+              }}
+            >
+              SAVE OUTFIT
+            </button>
+          </Col>
+          <Col size={"md-2"} className="text-center m-1">
+            <button
+              type="button"
+              class="btn btn-danger"
+              onClick={() => {
+                window.location.reload();
+              }}
+            >
+              FISH AGAIN
+            </button>
+          </Col>
+        </Row>
+        <br />
+        <Row className="justify-content-center">
+          <Col size="md-3">
+            <ClothingItem
+              imageURL={
+                this.state.top && this.state.clothingType === "Tops"
+                  ? this.state.clothingItem.imageURL
+                  : this.state.top
+                  ? this.state.top.imageURL
+                  : "error"
+              }
+            />
+          </Col>
+          <Col size="md-3">
+            <ClothingItem
+              imageURL={
+                this.state.bottom && this.state.clothingType === "Bottoms"
+                  ? this.state.clothingItem.imageURL
+                  : this.state.bottom
+                  ? this.state.bottom.imageURL
+                  : "error"
+              }
+            />
+          </Col>
+        </Row>
+        <br />
+        <Row className="justify-content-center">
+          <Col size="md-3">
+            <ClothingItem
+              imageURL={
+                this.state.outerwear && this.state.clothingType === "Outerwear"
+                  ? this.state.clothingItem.imageURL
+                  : this.state.outerwear
+                  ? this.state.outerwear.imageURL
+                  : "error"
+              }
+            />
+          </Col>
+          <Col size="md-3">
+            <ClothingItem
+              imageURL={
+                this.state.shoe && this.state.clothingType === "Shoes"
+                  ? this.state.clothingItem.imageURL
+                  : this.state.shoe
+                  ? this.state.shoe.imageURL
+                  : "error"
+              }
+            />
+          </Col>
+        </Row>
       </Container>
     );
   }
