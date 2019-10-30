@@ -2,9 +2,6 @@ import axios from "axios";
 
 export default {
   // Gets all
-  getClothes: function() {
-    return axios.get("/api/clothes");
-  },
 
   createUser: function(newUser) {
     return axios({
@@ -12,6 +9,10 @@ export default {
       url: "/api/users",
       data: newUser
     });
+  },
+
+  getUser: function(userId) {
+    return axios(`/api/users/${userId}`);
   },
   getTops: function() {
     return axios.get("/api/clothes/tops");
@@ -53,8 +54,10 @@ export default {
   deleteAllOutfits: function() {
     return axios.delete(`/api/outfits`);
   },
-
   deleteAllOutfitsFromUser: function(userId) {
-    return axios.delete(`/api/outfits/${userId}`);
+    return axios.delete(`/api/outfits/user/${userId}`);
+  },
+  deleteOneOutfit: function(outfitId) {
+    return axios.delete(`/api/outfits/${outfitId}`);
   }
 };

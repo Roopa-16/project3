@@ -25,9 +25,6 @@ module.exports = {
   create: function(req, res) {
     console.log(req.body);
     console.log(`\n\nAnd here is the user ID ${req.params.id}`);
-    // db.Outfit.create(req.body)
-    //   .then(dbModel => res.json(dbModel))
-    //   .catch(err => res.status(422).json(err));
 
     db.Outfit.create(req.body)
       .then(function(dbModel) {
