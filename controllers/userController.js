@@ -35,41 +35,15 @@ module.exports = {
                 };
                 // Creating salt & hash
                 bcrypt.genSalt(10, (err, salt) => {
-                  bcrypt.hash(newUser.password, salt, (err, hash) => {
-                    if (err) throw err;
-                    newUser.password = hash;
-
-                    if (hash) {
-                      db.User.create(newUser)
-                        .then(dbModel => {
-                          jwt.sign(
-                            {
-                              userid: dbModel._id,
-                              username: db.username
-                            },
-                            config.jwtSecret,
-                            { expiresIn: 4000 },
-                            (err, token) => {
-                              if (err) throw err;
-                              res.json({
-                                token: token,
-                                message:
-                                  "Welcome to Stylefish. Time to log in " +
-                                  dbModel.username +
-                                  "!",
-                                username: dbModel.username,
-                                password: dbModel.password
-                              });
-                            }
-                          );
-                        })
-                        .catch(err =>
-                          res.status(422).json({
-                            message:
-                              "There was a problem with the database. (Error 422)"
-                          })
-                        );
-                    }
+                  bcrypt.hash(req.body.password, salt, (err, hash) => {
+                    newUser.password = hash
+                    db.User.create(newUser).then((dbUser => {
+                      res.json({
+                        username: dbUser.username,
+                        password: dbUser.password,
+                        message: "Welcome to stylefish!"
+                      })
+                    }))
                   });
                 });
               } else {
