@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import Jumbotron from "../../Components/Jumbotron";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../Components/Grid";
-import { List, ListItem } from "../../Components/List";
-import { Input, TextArea, FormBtn } from "../../Components/Form";
 import ClothingItem from "../../Components/ClothingItem";
 
 class Outfit extends Component {
@@ -152,12 +149,14 @@ class Outfit extends Component {
     return (
       <Container fluid>
         <Jumbotron>
-          <h1>Your outfit, yo.</h1>
+          <h1>Your Outfit!</h1>
         </Jumbotron>
         <Container>
           <Row>
-            <Col size={"md-6"}>
+          <Col size={"md-2"}></Col>
+            <Col size={"md-1"}>
               <button
+              type="button" class="btn btn-success"
                 onClick={() => {
                   this.createOutfit(() =>
                     this.saveOutfit("5db75b79c9e53d19ad99b030", () =>
@@ -171,16 +170,21 @@ class Outfit extends Component {
                 SAVE OUTFIT
               </button>
             </Col>
-            <Col size={"md-6"}>
+            <Col size={"md-2"}></Col>
+            <Col size={"md-1"}>
               <button
+              type="button" class="btn btn-danger"
                 onClick={() => {
                   window.location.reload();
                 }}
               >
                 FISH AGAIN
               </button>
-              &nbsp;
+              </Col>
+              <Col size={"md-2"}></Col>
+            <Col size={"md-1"}>
               <button
+              type="button" class="btn btn-warning"
                 onClick={() => {
                   API.deleteAllOutfits();
                 }}
@@ -188,9 +192,12 @@ class Outfit extends Component {
                 DELETE ALL OUTFITS
               </button>
             </Col>
+            <Col size={"md-2"}></Col>
           </Row>
+          <br/>
           <Row>
-            <Col size="md-6">
+          <Col size={"md-2"}></Col>
+            <Col size="md-4">
               <h2>Top</h2>
               <ClothingItem
                 imageURL={
@@ -202,7 +209,7 @@ class Outfit extends Component {
                 }
               />
             </Col>
-            <Col size="md-6">
+            <Col size="md-4">
               <h2>Bottom</h2>{" "}
               <ClothingItem
                 imageURL={
@@ -214,9 +221,12 @@ class Outfit extends Component {
                 }
               />
             </Col>
+            <Col size={"md-2"}></Col>
           </Row>
+          <br/>
           <Row>
-            <Col size="md-6">
+          <Col size={"md-2"}></Col>
+            <Col size="md-4">
               <h2>Outerwear</h2>{" "}
               <ClothingItem
                 imageURL={
@@ -229,7 +239,7 @@ class Outfit extends Component {
                 }
               />
             </Col>
-            <Col size="md-6">
+            <Col size="md-4">
               <h2>Shoe</h2>{" "}
               <ClothingItem
                 imageURL={
@@ -241,6 +251,7 @@ class Outfit extends Component {
                 }
               />
             </Col>
+            <Col size={"md-2"}></Col>
           </Row>
         </Container>
       </Container>
