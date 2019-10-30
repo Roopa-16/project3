@@ -1,6 +1,8 @@
 const db = require("../models");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const config = require("../jwtconfig/default.json");
+
 // Defining methods for the UsersController
 module.exports = {
   findAll: function(req, res) {
@@ -36,18 +38,31 @@ module.exports = {
                   bcrypt.hash(newUser.password, salt, (err, hash) => {
                     if (err) throw err;
                     newUser.password = hash;
+
                     if (hash) {
                       db.User.create(newUser)
-                        .then(dbModel =>
-                          res.json({
-                            message:
-                              "Welcome to Stylefish. Time to log in " +
-                              dbModel.username +
-                              "!",
-                            username: dbModel.username,
-                            password: dbModel.password
-                          })
-                        )
+                        .then(dbModel => {
+                          jwt.sign(
+                            {
+                              userid: dbModel._id,
+                              username: db.username
+                            },
+                            config.jwtSecret,
+                            { expiresIn: 4000 },
+                            (err, token) => {
+                              if (err) throw err;
+                              res.json({
+                                token: token,
+                                message:
+                                  "Welcome to Stylefish. Time to log in " +
+                                  dbModel.username +
+                                  "!",
+                                username: dbModel.username,
+                                password: dbModel.password
+                              });
+                            }
+                          );
+                        })
                         .catch(err =>
                           res.status(422).json({
                             message:
