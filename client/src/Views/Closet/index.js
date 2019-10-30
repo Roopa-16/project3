@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Jumbotron from "../../Components/Jumbotron";
 import { Col, Row, Container } from "../../Components/Grid";
-import { List, ListItem } from "../../Components/List";
-import { Input, TextArea, FormBtn } from "../../Components/Form";
 import ClothingItem from "../../Components/ClothingItem";
-import { runInThisContext } from "vm";
-import { stat } from "fs";
+import API from "../../utils/API";
 const hardCodedUserId = "5db75b79c9e53d19ad99b030";
 
 class Closet extends Component {
