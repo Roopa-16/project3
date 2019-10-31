@@ -16,8 +16,8 @@ router.route("/").post((req, res) => {
             config.jwtSecret,
             { expiresIn: 36000 },
             (err, token) => {
-              res.json({ 
-                message: "Success.",
+              res.json({
+                message: `success yo! token is ${token}`,
                 token
               });
             }
