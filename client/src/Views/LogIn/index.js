@@ -16,7 +16,7 @@ class LogIn extends Component {
     API.logUser(userObj)
       .then(function(response) {
         console.log(response);
-        // alert(response.data.message);
+          alert(response.data.message);
       })
       .catch(function(error) {
         console.log(error);
@@ -49,7 +49,6 @@ class LogIn extends Component {
     } else {
       alert("Your email is invalid")
     }
-    alert("you are in login")
   };
 
   render() {
@@ -73,10 +72,11 @@ class LogIn extends Component {
                 onChange={this.handleInputChange}
                 name="userPassword"
                 placeholder="Password"
+                type="Password"
               />
               <FormBtn
                 disabled={!(this.state.userEmail && this.state.userPassword)}
-                // onClick={this.handleFormSubmit}
+                onClick={this.handleFormSubmit}
               >
                 Log in
               </FormBtn>
