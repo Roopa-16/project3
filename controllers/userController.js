@@ -1,4 +1,7 @@
 const db = require("../models");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const config = require("../jwtconfig/default.json");
 
 // Defining methods for the UsersController
 module.exports = {
@@ -25,21 +28,38 @@ module.exports = {
           })
             .then(function(usernameModel) {
               if (usernameModel.length === 0) {
-                db.User.create(req.body)
-                  .then(dbModel =>
-                    res.json({
-                      message:
-                        "Welcome to Stylefish. Time to log in " +
-                        dbModel.username +
-                        "!"
-                    })
-                  )
-                  .catch(err =>
-                    res.status(422).json({
-                      message:
-                        "There was a problem with the database. (Error 422)"
-                    })
-                  );
+                newUser = {
+                  email: req.body.email,
+                  username: req.body.username,
+                  password: req.body.password
+                };
+                // Creating salt & hash
+                bcrypt.genSalt(10, (err, salt) => {
+                  bcrypt.hash(req.body.password, salt, (err, hash) => {
+                    newUser.password = hash;
+                    db.User.create(newUser)
+                      .then(dbUser => {
+                        jwt.sign(
+                          { id: dbUser._id },
+                          config.jwtSecret,
+                          { expiresIn: 36000 },
+                          (err, token) => {
+                            res.json({
+                              username: dbUser.username,
+                              password: dbUser.password,
+                              token,
+                              message: "Welcome to stylefish!"
+                            });
+                          }
+                        );
+                      })
+                      .catch(err => {
+                        res.json({
+                          message: "There was a problem with the database."
+                        });
+                      });
+                  });
+                });
               } else {
                 res.json({
                   message: "This username is already taken."

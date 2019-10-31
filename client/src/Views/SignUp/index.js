@@ -34,6 +34,7 @@ class LogIn extends Component {
     console.log(userObj);
     API.createUser(userObj)
       .then(function(response) {
+        console.log(response);
         alert(response.data.message);
       })
       .catch(function(error) {

@@ -10,15 +10,20 @@ import Nav from "./Components/Nav";
 // import Footer from "./Components/Footer";
 import NoMatch from "./Views/NoMatch";
 import ClothingDetail from "./Views/ClothingDetail";
+import { getSession, logOut } from "./utils/Session";
 import "./normalize.css";
 import "./App.css";
 
 function App() {
+  // const getSession = () => {
+  //   return false;
+  // };
   return (
     <Router>
       <div>
         <Nav />
         <Switch>
+          {/* <Route path="/" component={getSession() ? Home : LogIn} /> */}
           <Route exact path="/" component={LogIn} />
           <Route exact path="/LogIn" component={LogIn} />
           <Route exact path="/About" component={About} />
