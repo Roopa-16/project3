@@ -7,12 +7,16 @@ const hardCodedUserId = "5db75b79c9e53d19ad99b030";
 
 class Closet extends Component {
   state = {
-    outfits: []
+    outfits: [],
+    user: ""
   };
 
   componentDidMount() {
     this.reloadOutfits(hardCodedUserId);
     let userId = this.props.match.params.id;
+    API.getUser(userId).then(res => {
+      this.setState({ user: res.data });
+    });
     // we can get outfits from User ID in URL params
   }
 
@@ -35,7 +39,11 @@ class Closet extends Component {
       <>
         <Container>
           <Jumbotron>
-            <h1>My Closet</h1>
+            {this.state.user ? (
+              <h1>{this.state.user.username}'s Closet</h1>
+            ) : (
+              "My Closet"
+            )}
           </Jumbotron>
           <Row style={{ textAlign: "center" }}>
             <Col size="md-6">
