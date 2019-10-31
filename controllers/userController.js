@@ -36,14 +36,28 @@ module.exports = {
                 // Creating salt & hash
                 bcrypt.genSalt(10, (err, salt) => {
                   bcrypt.hash(req.body.password, salt, (err, hash) => {
-                    newUser.password = hash
-                    db.User.create(newUser).then((dbUser => {
-                      res.json({
-                        username: dbUser.username,
-                        password: dbUser.password,
-                        message: "Welcome to stylefish!"
+                    newUser.password = hash;
+                    db.User.create(newUser)
+                      .then(dbUser => {
+                        jwt.sign(
+                          { id: dbUser._id },
+                          config.jwtSecret,
+                          { expiresIn: 36000 },
+                          (err, token) => {
+                            res.json({
+                              username: dbUser.username,
+                              password: dbUser.password,
+                              token,
+                              message: "Welcome to stylefish!"
+                            });
+                          }
+                        );
                       })
-                    }))
+                      .catch(err => {
+                        res.json({
+                          message: "There was a problem with the database."
+                        });
+                      });
                   });
                 });
               } else {
