@@ -19,13 +19,15 @@ router.route("/").post((req, res) => {
             (err, token) => {
               res.json({
                 message: `success yo! token is ${token}`,
-                token
+                token,
+                isAuthed: true
               });
             }
           );
         } else {
           res.json({
-            message: "Incorrect credentials."
+            message: "Incorrect credentials.",
+            isAuthed: false
           });
         }
       });

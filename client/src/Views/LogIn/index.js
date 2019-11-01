@@ -1,18 +1,22 @@
 import React, { Component } from "react";
 import Jumbotron from "../../Components/Jumbotron";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { Container, Row, Col } from "../../Components/Grid";
 import { Input, FormBtn } from "../../Components/Form";
 import API from "../../utils/API";
 import Cookies from "js-cookie";
+import LoginModal from "../../Components/LoginModal";
+import { runInThisContext } from "vm";
 
 class LogIn extends Component {
   state = {
     userEmail: "",
-    userPassword: ""
+    userPassword: "",
+    isAuthed: ""
   };
 
   componentDidMount() {
+    // this.setState({ isAuthed: undefined });
     let cookie = Cookies.get("userToken");
     console.log(cookie);
   }
@@ -20,12 +24,21 @@ class LogIn extends Component {
   logSubmit = userObj => {
     API.logUser(userObj)
       .then(function(response) {
-        console.log(response);
-        Cookies.set("userToken", response.data.token);
-        alert(response.data.message).then(() => {
-          // window.location.reload();
-        });
+        console.log(response.data);
+        if (response.data.token) {
+          Cookies.set("userToken", response.data.token);
+        }
+        alert(response.data.message);
+        if (response.data.isAuthed === true) {
+          window.location.replace("/");
+        }
+        // if (response.data.isAuthed === false) {
+        //   this.setState({ isAuthed: false });
+        // } else if (response.data.isAuthed === true) {
+        //   this.setState({ isAuthed: true });
+        // }
       })
+      // .then(window.location.replace("/"))
       .catch(function(error) {
         console.log(error);
       });
@@ -43,7 +56,7 @@ class LogIn extends Component {
     return re.test(email);
   };
 
-  handleFormSubmit = event => {
+  handleLogIn = event => {
     event.preventDefault();
     if (
       this.validateEmail(this.state.userEmail) &&
@@ -57,10 +70,6 @@ class LogIn extends Component {
     } else {
       alert("Your email is invalid");
     }
-  };
-
-  logout = () => {
-    Cookies.remove("userToken");
   };
 
   render() {
@@ -88,7 +97,7 @@ class LogIn extends Component {
               />
               <FormBtn
                 disabled={!(this.state.userEmail && this.state.userPassword)}
-                onClick={this.handleFormSubmit}
+                onClick={this.handleLogIn}
               >
                 Log in
               </FormBtn>
@@ -98,10 +107,12 @@ class LogIn extends Component {
               Don't have an account?
               <br />
               <Link to="/SignUp"> Sign Up Here</Link>{" "}
-              <button onClick={this.logout}>Log Out</button>
             </p>
           </Col>
         </Row>
+        <LoginModal
+          auth={this.state.isAuthed ? this.state.isAuthed : undefined}
+        />
       </Container>
     );
   }

@@ -22,9 +22,11 @@ import { getSession, logOut } from "./utils/Session";
 import "./normalize.css";
 import "./App.css";
 
+import { PrivateRoute } from "./Helpers/PrivateRoute";
+
 class App extends Component {
   state = {
-    session: ""
+    session: undefined
   };
 
   componentDidMount() {
@@ -39,22 +41,26 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Nav />
+          <Nav session={this.state.session} />
           <Switch>
-            <Route exact path="/" component={LogIn} />
+            <PrivateRoute exact path="/" component={Home} />
             <Route exact path="/LogIn" component={LogIn} />
             <Route exact path="/About" component={About} />
             <Route exact path="/SignUp" component={SignUp} />
-            <Route exact path="/Home" component={Home} />
-            <Route exact path="/Closet" component={Closet} />
-            <Route exact path="/ClothingDetail" component={ClothingDetail} />
-            <Route exact path="/Outfit" component={Outfit} />
-            <Route path="/Outfit/:clothingType/:id" component={Outfit} />
-            <Route
+            <PrivateRoute exact path="/Home" component={Home} />
+            <PrivateRoute exact path="/Closet" component={Closet} />
+            <PrivateRoute
+              exact
+              path="/ClothingDetail"
+              component={ClothingDetail}
+            />
+            <PrivateRoute exact path="/Outfit" component={Outfit} />
+            <PrivateRoute path="/Outfit/:clothingType/:id" component={Outfit} />
+            <PrivateRoute
               path="/ClothingDetail/:clothingType"
               component={ClothingDetail}
             />
-            <Route path="/Closet/:id" component={Closet} />
+            <PrivateRoute path="/Closet/:id" component={Closet} />
 
             <Route component={NoMatch} />
           </Switch>

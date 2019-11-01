@@ -14,4 +14,5 @@ export const getSession = () => {
 };
 export const logOut = () => {
   Cookies.remove("userToken");
+  window.location.replace("/");
 };
