@@ -1,5 +1,13 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { Component } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useHistory,
+  useLocation
+} from "react-router-dom";
 import About from "./Views/About";
 import Closet from "./Views/Closet";
 import Home from "./Views/Home";
@@ -14,36 +22,47 @@ import { getSession, logOut } from "./utils/Session";
 import "./normalize.css";
 import "./App.css";
 
-function App() {
-  // const getSession = () => {
-  //   return false;
-  // };
-  return (
-    <Router>
-      <div>
-        <Nav />
-        <Switch>
-          {/* <Route path="/" component={getSession() ? Home : LogIn} /> */}
-          <Route exact path="/" component={LogIn} />
-          <Route exact path="/LogIn" component={LogIn} />
-          <Route exact path="/About" component={About} />
-          <Route exact path="/Home" component={Home} />
-          <Route exact path="/SignUp" component={SignUp} />
-          <Route exact path="/Closet" component={Closet} />
-          <Route exact path="/ClothingDetail" component={ClothingDetail} />
-          <Route exact path="/Outfit" component={Outfit} />
-          <Route path="/Outfit/:clothingType/:id" component={Outfit} />
-          <Route
-            path="/ClothingDetail/:clothingType"
-            component={ClothingDetail}
-          />
-          <Route path="/Closet/:id" component={Closet} />
-          <Route component={NoMatch} />
-        </Switch>
-        {/* <Footer /> */}
-      </div>
-    </Router>
-  );
+class App extends Component {
+  state = {
+    session: ""
+  };
+
+  componentDidMount() {
+    let obj = getSession();
+    if (obj) {
+      console.log(obj.id);
+      this.setState({ session: obj.id });
+    }
+  }
+
+  render() {
+    return (
+      <Router>
+        <div>
+          <Nav />
+          <Switch>
+            <Route exact path="/" component={LogIn} />
+            <Route exact path="/LogIn" component={LogIn} />
+            <Route exact path="/About" component={About} />
+            <Route exact path="/SignUp" component={SignUp} />
+            <Route exact path="/Home" component={Home} />
+            <Route exact path="/Closet" component={Closet} />
+            <Route exact path="/ClothingDetail" component={ClothingDetail} />
+            <Route exact path="/Outfit" component={Outfit} />
+            <Route path="/Outfit/:clothingType/:id" component={Outfit} />
+            <Route
+              path="/ClothingDetail/:clothingType"
+              component={ClothingDetail}
+            />
+            <Route path="/Closet/:id" component={Closet} />
+
+            <Route component={NoMatch} />
+          </Switch>
+          {/* <Footer /> */}
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;

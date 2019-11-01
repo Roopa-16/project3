@@ -16,10 +16,10 @@ export default {
   },
   logUser: function(userDetails) {
     return axios({
-      method: 'post',
+      method: "post",
       url: "/api/login/",
       data: userDetails
-    })
+    });
   },
   getTops: function() {
     return axios.get("/api/clothes/tops");

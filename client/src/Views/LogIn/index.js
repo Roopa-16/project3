@@ -3,20 +3,28 @@ import Jumbotron from "../../Components/Jumbotron";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "../../Components/Grid";
 import { Input, FormBtn } from "../../Components/Form";
-import API from "../../utils/API"
+import API from "../../utils/API";
+import Cookies from "js-cookie";
+
 class LogIn extends Component {
   state = {
     userEmail: "",
     userPassword: ""
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    let cookie = Cookies.get("userToken");
+    console.log(cookie);
+  }
 
   logSubmit = userObj => {
     API.logUser(userObj)
       .then(function(response) {
         console.log(response);
-          alert(response.data.message);
+        Cookies.set("userToken", response.data.token);
+        alert(response.data.message).then(() => {
+          // window.location.reload();
+        });
       })
       .catch(function(error) {
         console.log(error);
@@ -42,13 +50,17 @@ class LogIn extends Component {
       !this.state.userEmail.split("").includes(" ")
     ) {
       const logDetails = {
-      email: this.state.userEmail,
-      password: this.state.userPassword
-    }
-    this.logSubmit(logDetails);
+        email: this.state.userEmail,
+        password: this.state.userPassword
+      };
+      this.logSubmit(logDetails);
     } else {
-      alert("Your email is invalid")
+      alert("Your email is invalid");
     }
+  };
+
+  logout = () => {
+    Cookies.remove("userToken");
   };
 
   render() {
@@ -86,6 +98,7 @@ class LogIn extends Component {
               Don't have an account?
               <br />
               <Link to="/SignUp"> Sign Up Here</Link>{" "}
+              <button onClick={this.logout}>Log Out</button>
             </p>
           </Col>
         </Row>

@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../Components/Grid";
 import ClothingItem from "../../Components/ClothingItem";
 import ClosetFeed from "../../Components/ClosetFeed";
+import Cookies from "js-cookie";
+
 import "./style.css";
 
 class Home extends Component {
@@ -17,6 +19,10 @@ class Home extends Component {
 
   componentDidMount() {
     this.loadClothes();
+    let cookie = Cookies.get("userToken");
+    console.log(
+      `hey here is your cookie which is the JWT as well :) : ${cookie}`
+    );
   }
 
   loadClothes = () => {

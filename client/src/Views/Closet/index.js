@@ -3,26 +3,48 @@ import Jumbotron from "../../Components/Jumbotron";
 import { Col, Row, Container } from "../../Components/Grid";
 import ClothingItem from "../../Components/ClothingItem";
 import API from "../../utils/API";
-const hardCodedUserId = "5db75b79c9e53d19ad99b030";
-
+// const hardCodedUserId = "5db75b79c9e53d19ad99b030";
+import { getSession, logOut } from "../../utils/Session";
+let userId;
+let otherUserId;
 class Closet extends Component {
   state = {
     outfits: [],
-    user: ""
+    user: "",
+    userId: ""
   };
 
-  componentDidMount() {
-    this.reloadOutfits(hardCodedUserId);
-    let userId = this.props.match.params.id;
-    API.getUser(userId).then(res => {
-      this.setState({ user: res.data });
-    });
-    // we can get outfits from User ID in URL params
+  async componentDidMount() {
+    let currentUser = await getSession();
+    let otherUserId = this.props.match.params.id;
+
+    if (otherUserId) {
+      this.setState({ userId: otherUserId }, () => {
+        this.reloadOutfits(otherUserId);
+        API.getUser(otherUserId).then(res => {
+          this.setState({ user: res.data });
+        });
+      });
+      return;
+    } else if (currentUser) {
+      console.log(currentUser.id);
+      if (currentUser.id) {
+        this.setState({ userId: currentUser.id }, () => {
+          this.reloadOutfits(currentUser.id);
+          API.getUser(currentUser.id).then(res => {
+            this.setState({ user: res.data });
+          });
+        });
+      }
+      return;
+    } else {
+      console.log("better do this or else!");
+    }
   }
 
-  reloadOutfits = hardCodedUserId => {
+  reloadOutfits = someId => {
     this.setState({ outfits: [] });
-    API.getUser(hardCodedUserId)
+    API.getUser(someId)
       .then(response => {
         response.data.outfits.map(el => {
           API.getOutfit(el._id).then(res => {
@@ -42,23 +64,28 @@ class Closet extends Component {
             {this.state.user ? (
               <h1>{this.state.user.username}'s Closet</h1>
             ) : (
-              "My Closet"
+              <h1>My Closet</h1>
             )}
           </Jumbotron>
           <Row style={{ textAlign: "center" }}>
-            <Col size="md-6">
-              <button
-                type="button"
-                class="btn btn-danger"
-                onClick={() => {
-                  API.deleteAllOutfitsFromUser(hardCodedUserId).then(() =>
-                    this.reloadOutfits()
-                  );
-                }}
-              >
-                DELETE ALL OUTFITS FROM USER
-              </button>
-            </Col>
+            {!otherUserId && userId ? (
+              <Col size="md-6">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  onClick={() => {
+                    API.deleteAllOutfitsFromUser(userId).then(() =>
+                      this.reloadOutfits()
+                    );
+                  }}
+                >
+                  DELETE ALL OUTFITS FROM USER
+                </button>
+              </Col>
+            ) : (
+              ""
+            )}
+
             <Col size="md-6">
               <button
                 type="button"

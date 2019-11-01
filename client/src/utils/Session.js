@@ -1,14 +1,11 @@
 import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
 export const getSession = () => {
-  const jwt = Cookies.get("__session");
+  const jwt = Cookies.get("userToken");
   let session;
   try {
     if (jwt) {
-      const base64Url = jwt.split(".")[1];
-      const base64 = base64Url.replace("-", "+").replace("_", "/");
-      // what is window.atob ?
-      // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/atob
-      session = JSON.parse(window.atob(base64));
+      session = jwt_decode(jwt);
     }
   } catch (error) {
     console.log(error);
@@ -16,5 +13,5 @@ export const getSession = () => {
   return session;
 };
 export const logOut = () => {
-  Cookies.remove("__session");
+  Cookies.remove("userToken");
 };
