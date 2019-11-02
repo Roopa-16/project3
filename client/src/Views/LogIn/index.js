@@ -1,23 +1,44 @@
 import React, { Component } from "react";
 import Jumbotron from "../../Components/Jumbotron";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { Container, Row, Col } from "../../Components/Grid";
 import { Input, FormBtn } from "../../Components/Form";
-import API from "../../utils/API"
+import API from "../../utils/API";
+import Cookies from "js-cookie";
+import LoginModal from "../../Components/LoginModal";
+import { runInThisContext } from "vm";
+
 class LogIn extends Component {
   state = {
     userEmail: "",
-    userPassword: ""
+    userPassword: "",
+    isAuthed: ""
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    // this.setState({ isAuthed: undefined });
+    let cookie = Cookies.get("userToken");
+    console.log(cookie);
+  }
 
   logSubmit = userObj => {
     API.logUser(userObj)
       .then(function(response) {
-        console.log(response);
-          alert(response.data.message);
+        console.log(response.data);
+        if (response.data.token) {
+          Cookies.set("userToken", response.data.token);
+        }
+        alert(response.data.message);
+        if (response.data.isAuthed === true) {
+          window.location.replace("/");
+        }
+        // if (response.data.isAuthed === false) {
+        //   this.setState({ isAuthed: false });
+        // } else if (response.data.isAuthed === true) {
+        //   this.setState({ isAuthed: true });
+        // }
       })
+      // .then(window.location.replace("/"))
       .catch(function(error) {
         console.log(error);
       });
@@ -35,19 +56,19 @@ class LogIn extends Component {
     return re.test(email);
   };
 
-  handleFormSubmit = event => {
+  handleLogIn = event => {
     event.preventDefault();
     if (
       this.validateEmail(this.state.userEmail) &&
       !this.state.userEmail.split("").includes(" ")
     ) {
       const logDetails = {
-      email: this.state.userEmail,
-      password: this.state.userPassword
-    }
-    this.logSubmit(logDetails);
+        email: this.state.userEmail,
+        password: this.state.userPassword
+      };
+      this.logSubmit(logDetails);
     } else {
-      alert("Your email is invalid")
+      alert("Your email is invalid");
     }
   };
 
@@ -76,7 +97,7 @@ class LogIn extends Component {
               />
               <FormBtn
                 disabled={!(this.state.userEmail && this.state.userPassword)}
-                onClick={this.handleFormSubmit}
+                onClick={this.handleLogIn}
               >
                 Log in
               </FormBtn>
@@ -89,6 +110,9 @@ class LogIn extends Component {
             </p>
           </Col>
         </Row>
+        <LoginModal
+          auth={this.state.isAuthed ? this.state.isAuthed : undefined}
+        />
       </Container>
     );
   }

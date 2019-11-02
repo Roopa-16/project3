@@ -40,7 +40,7 @@ module.exports = {
                     db.User.create(newUser)
                       .then(dbUser => {
                         jwt.sign(
-                          { id: dbUser._id },
+                          { id: dbUser._id, email: dbUser.email },
                           config.jwtSecret,
                           { expiresIn: 36000 },
                           (err, token) => {
