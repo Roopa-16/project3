@@ -11,7 +11,9 @@ module.exports = {
         }
       });
       let array = res.data;
-      let newOutfit = array[0];
+      // console.log(`here is the array, sock methods line 14 ${array}`);
+      let newOutfit = array[array.length - 1];
+      // console.log(newOutfit);
       // if no new book, then exit the function
       if (!newOutfit) {
         return;
