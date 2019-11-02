@@ -15,10 +15,10 @@ class Closet extends Component {
 
   async componentDidMount() {
     let currentUser = await getSession();
-    let otherUserId = this.props.match.params.id;
 
-    if (otherUserId) {
-      this.setState({ userId: otherUserId }, () => {
+    if (this.props.match.params.id) {
+      let otherUserId = this.props.match.params.id;
+      this.setState({ userId: currentUser.id }, () => {
         this.reloadOutfits(otherUserId);
         API.getUser(otherUserId).then(res => {
           this.setState({ user: res.data, otherUser: true });
@@ -136,14 +136,16 @@ class Closet extends Component {
                 </Row>
                 <Row>
                   <Col size="md-6" className="text-center">
-                    {this.state.otherUser ? (
+                    {this.state.otherUser && this.state.userId ? (
                       <>
                         <button
                           type="button"
                           className="btn btn-danger"
                           onClick={() =>
                             API.saveOutfit(this.state.userId, outfit).then(
-                              alert("saved to your closet!")
+                              alert(
+                                `saved to users closet who has an id of ${this.state.userId}`
+                              )
                             )
                           }
                         >
