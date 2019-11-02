@@ -4,8 +4,6 @@ import API from "../../utils/API";
 import { Col, Row, Container } from "../../Components/Grid";
 import ClothingItem from "../../Components/ClothingItem";
 import { getSession } from "../../utils/Session";
-const hardCodedUserId = "5db75b79c9e53d19ad99b030";
-let currentUser;
 class Outfit extends Component {
   state = {
     clothingType: "",
@@ -140,7 +138,7 @@ class Outfit extends Component {
           bottom: bottom,
           shoe: shoe,
           outerwear: outerwear,
-          user: hardCodedUserId
+          user: this.state.userId
         }
       }),
       () => cb()

@@ -3,15 +3,14 @@ import Jumbotron from "../../Components/Jumbotron";
 import { Col, Row, Container } from "../../Components/Grid";
 import ClothingItem from "../../Components/ClothingItem";
 import API from "../../utils/API";
-// const hardCodedUserId = "5db75b79c9e53d19ad99b030";
-import { getSession, logOut } from "../../utils/Session";
-let userId;
-let otherUserId;
+import { getSession } from "../../utils/Session";
+
 class Closet extends Component {
   state = {
     outfits: [],
     user: "",
-    userId: ""
+    userId: "",
+    otherUser: undefined
   };
 
   async componentDidMount() {
@@ -22,7 +21,7 @@ class Closet extends Component {
       this.setState({ userId: otherUserId }, () => {
         this.reloadOutfits(otherUserId);
         API.getUser(otherUserId).then(res => {
-          this.setState({ user: res.data });
+          this.setState({ user: res.data, otherUser: true });
         });
       });
       return;
@@ -32,7 +31,7 @@ class Closet extends Component {
         this.setState({ userId: currentUser.id }, () => {
           this.reloadOutfits(currentUser.id);
           API.getUser(currentUser.id).then(res => {
-            this.setState({ user: res.data });
+            this.setState({ user: res.data, otherUser: false });
           });
         });
       }
@@ -61,25 +60,28 @@ class Closet extends Component {
       <>
         <Container>
           <Jumbotron>
-            {this.state.user ? (
+            {this.state.otherUser ? (
               <h1>{this.state.user.username}'s Closet</h1>
             ) : (
               <h1>My Closet</h1>
             )}
           </Jumbotron>
           <Row style={{ textAlign: "center" }}>
-            {!otherUserId && userId ? (
+            {!this.state.otherUser && this.state.userId ? (
               <Col size="md-6">
                 <button
                   type="button"
                   class="btn btn-danger"
                   onClick={() => {
-                    API.deleteAllOutfitsFromUser(userId).then(() =>
-                      this.reloadOutfits()
-                    );
+                    if (window.confirm("Are you sure?")) {
+                      API.deleteAllOutfitsFromUser(this.state.userId).then(() =>
+                        this.reloadOutfits()
+                      );
+                    } else {
+                    }
                   }}
                 >
-                  DELETE ALL OUTFITS FROM USER
+                  Clean my closet
                 </button>
               </Col>
             ) : (
@@ -134,17 +136,35 @@ class Closet extends Component {
                 </Row>
                 <Row>
                   <Col size="md-6" className="text-center">
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={() =>
-                        API.deleteOneOutfit(outfit._id).then(
-                          this.reloadOutfits()
-                        )
-                      }
-                    >
-                      REMOVE
-                    </button>
+                    {this.state.otherUser ? (
+                      <>
+                        <button
+                          type="button"
+                          className="btn btn-danger"
+                          onClick={() =>
+                            API.saveOutfit(this.state.userId, outfit).then(
+                              alert("saved to your closet!")
+                            )
+                          }
+                        >
+                          SAVE
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          type="button"
+                          className="btn btn-danger"
+                          onClick={() =>
+                            API.deleteOneOutfit(outfit._id).then(
+                              this.reloadOutfits()
+                            )
+                          }
+                        >
+                          REMOVE
+                        </button>
+                      </>
+                    )}
                   </Col>
                   <Col size="md-6"></Col>
                 </Row>
