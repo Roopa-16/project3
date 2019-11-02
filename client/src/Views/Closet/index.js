@@ -5,6 +5,7 @@ import ClothingItem from "../../Components/ClothingItem";
 import API from "../../utils/API";
 // const hardCodedUserId = "5db75b79c9e53d19ad99b030";
 import { getSession, logOut } from "../../utils/Session";
+import Title from "../../Components/TitleAnimation"
 let userId;
 let otherUserId;
 class Closet extends Component {
@@ -60,13 +61,13 @@ class Closet extends Component {
     return (
       <>
         <Container>
-          <Jumbotron>
+          <Title>
             {this.state.user ? (
               <h1>{this.state.user.username}'s Closet</h1>
             ) : (
               <h1>My Closet</h1>
             )}
-          </Jumbotron>
+</Title>
           <Row style={{ textAlign: "center" }}>
             {!otherUserId && userId ? (
               <Col size="md-6">

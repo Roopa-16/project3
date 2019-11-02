@@ -27,7 +27,7 @@ class ClosetFeed extends Component {
       <p className="feed">
         Closet Feed... works if you have a hardcoded user ID and are saving
         outfits correctly. Styling / layout TBD
-        <br />
+        {/* <br />
         {this.state.outfit ? (
           <Link to={`/Closet/${this.state.outfit.user._id}/`}>
             {this.state.outfit.user.username} saved a new outfit!
@@ -35,7 +35,7 @@ class ClosetFeed extends Component {
         ) : (
           ""
         )}
-        <hr></hr>
+        <hr></hr> */}
       </p>
     );
   }

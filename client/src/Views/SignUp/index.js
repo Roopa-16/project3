@@ -4,6 +4,7 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "../../Components/Grid";
 import { Input, FormBtn } from "../../Components/Form";
+import Title from "../../Components/TitleAnimation"
 
 class LogIn extends Component {
   state = {
@@ -77,9 +78,9 @@ class LogIn extends Component {
   render() {
     return (
       <Container>
-        <Jumbotron>
+    <Title>
           <h1>Sign Up</h1>
-        </Jumbotron>
+    </Title>
         <br />
         <Row className="justify-content-center">
           <Col size="md-6">
