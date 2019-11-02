@@ -34,11 +34,11 @@ function Nav(props) {
               <li className="nav-item">
                 <Link
                   className={
-                    window.location.pathname === "/Closet"
+                    window.location.pathname === "/MyCloset"
                       ? "nav-link active"
                       : "nav-link"
                   }
-                  to="/Closet"
+                  to="/MyCloset"
                 >
                   <div className="NavLinks">Closet</div>
                 </Link>

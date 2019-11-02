@@ -37,6 +37,7 @@ class LogIn extends Component {
       .then(function(response) {
         console.log(response);
         alert(response.data.message);
+        window.location.replace("/LogIn");
       })
       .catch(function(error) {
         console.log(error);

@@ -108,6 +108,20 @@ class LogIn extends Component {
               Don't have an account?
               <br />
               <Link to="/SignUp"> Sign Up Here</Link>{" "}
+              <button
+                onClick={() =>
+                  API.removeAllUsers().then(res => console.log(res))
+                }
+              >
+                ADMIN remove all users
+              </button>
+              <button
+                onClick={() =>
+                  API.deleteAllOutfits().then(res => console.log(res))
+                }
+              >
+                ADMIN remove all outfits
+              </button>
             </p>
           </Col>
         </Row>

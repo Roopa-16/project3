@@ -25,9 +25,6 @@ class ClosetFeed extends Component {
   render() {
     return (
       <p className="feed">
-        Closet Feed... works if you have a hardcoded user ID and are saving
-        outfits correctly. Styling / layout TBD
-        {/* <br />
         {this.state.outfit ? (
           <Link to={`/Closet/${this.state.outfit.user._id}/`}>
             {this.state.outfit.user.username} saved a new outfit!
