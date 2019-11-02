@@ -21,6 +21,9 @@ export default {
       data: userDetails
     });
   },
+  removeAllUsers: function() {
+    return axios.delete(`/api/users`);
+  },
   getTops: function() {
     return axios.get("/api/clothes/tops");
   },
