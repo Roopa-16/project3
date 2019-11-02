@@ -25,7 +25,6 @@ class ClosetFeed extends Component {
   render() {
     return (
       <p className="feed">
-        <br />
         {this.state.outfit ? (
           <Link to={`/Closet/${this.state.outfit.user._id}/`}>
             {this.state.outfit.user.username} saved a new outfit!
@@ -33,7 +32,7 @@ class ClosetFeed extends Component {
         ) : (
           ""
         )}
-        <hr></hr>
+        <hr></hr> */}
       </p>
     );
   }

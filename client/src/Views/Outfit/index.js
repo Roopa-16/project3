@@ -4,6 +4,11 @@ import API from "../../utils/API";
 import { Col, Row, Container } from "../../Components/Grid";
 import ClothingItem from "../../Components/ClothingItem";
 import { getSession } from "../../utils/Session";
+
+import Title from "../../Components/TitleAnimation"
+const hardCodedUserId = "5db75b79c9e53d19ad99b030";
+let currentUser;
+
 class Outfit extends Component {
   state = {
     clothingType: "",
@@ -154,9 +159,7 @@ class Outfit extends Component {
   render() {
     return (
       <Container>
-        <Jumbotron>
-          <h1>Your Outfit!</h1>
-        </Jumbotron>
+          <Title><h1>Your outfit!</h1></Title>
         <Row className="justify-content-center">
           <Col size={"md-2"} className="text-center m-1">
             <button
@@ -211,9 +214,6 @@ class Outfit extends Component {
               }
             />
           </Col>
-        </Row>
-        <br />
-        <Row className="justify-content-center">
           <Col size="md-3">
             <ClothingItem
               imageURL={

@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../Components/Grid";
 import ClothingItem from "../../Components/ClothingItem";
 import ClosetFeed from "../../Components/ClosetFeed";
+import Title from "../../Components/TitleAnimation"
 import Cookies from "js-cookie";
+
 
 import "./style.css";
 
@@ -43,9 +45,7 @@ class Home extends Component {
   render() {
     return (
       <Container fluid>
-        <Jumbotron>
-          <h1>Welcome to StyleFish!</h1>
-        </Jumbotron>
+          <Title><h1>StyleFish</h1></Title>
         <Row className="justify-content-center">
           <ClosetFeed />
         </Row>
@@ -78,8 +78,6 @@ class Home extends Component {
               />
             </Link>
           </Col>
-        </Row>
-        <Row className="justify-content-center">
           <Col size="md-3">
             <Link to="/ClothingDetail/Outerwear">
               <ClothingItem

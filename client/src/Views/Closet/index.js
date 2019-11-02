@@ -3,7 +3,12 @@ import Jumbotron from "../../Components/Jumbotron";
 import { Col, Row, Container } from "../../Components/Grid";
 import ClothingItem from "../../Components/ClothingItem";
 import API from "../../utils/API";
-import { getSession } from "../../utils/Session";
+
+// const hardCodedUserId = "5db75b79c9e53d19ad99b030";
+import { getSession, logOut } from "../../utils/Session";
+import Title from "../../Components/TitleAnimation"
+let userId;
+let otherUserId;
 
 class Closet extends Component {
   state = {
@@ -59,13 +64,15 @@ class Closet extends Component {
     return (
       <>
         <Container>
-          <Jumbotron>
-            {this.state.otherUser ? (
+
+          <Title>
+            {this.state.user ? (
+
               <h1>{this.state.user.username}'s Closet</h1>
             ) : (
               <h1>My Closet</h1>
             )}
-          </Jumbotron>
+</Title>
           <Row style={{ textAlign: "center" }}>
             {!this.state.otherUser && this.state.userId ? (
               <Col size="md-6">
