@@ -2,30 +2,19 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../../Components/Grid";
 import ClothingItem from "../../Components/ClothingItem";
 import API from "../../utils/API";
-import { getSession, logOut } from "../../utils/Session";
+import { getSession } from "../../utils/Session";
 import Title from "../../Components/TitleAnimation";
 
 class Closet extends Component {
   state = {
     outfits: [],
     user: "",
-    userId: "",
-    otherUser: undefined
+    userId: ""
   };
 
   async componentDidMount() {
     let currentUser = await getSession();
-
-    if (this.props.match.params.id) {
-      let otherUserId = this.props.match.params.id;
-      this.setState({ userId: currentUser.id }, () => {
-        this.reloadOutfits(otherUserId);
-        API.getUser(otherUserId).then(res => {
-          this.setState({ user: res.data, otherUser: true });
-        });
-      });
-      return;
-    } else if (currentUser) {
+    if (currentUser) {
       console.log(currentUser.id);
       if (currentUser.id) {
         this.setState({ userId: currentUser.id }, () => {
@@ -55,27 +44,15 @@ class Closet extends Component {
       .catch(err => console.log(err));
   };
 
-  savedStyles(e) {
-    e.preventDefault();
-    console.log(e.target);
-    e.target.className = "btn btn-success";
-    e.target.innerHTML = "SAVED!";
-    e.target.style.pointerEvents = "none";
-  }
-
   render() {
     return (
       <>
         <Container>
           <Title>
-            {this.state.otherUser === true ? (
-              <h1>{this.state.user.username}'s Closet</h1>
-            ) : (
-              <h1>My Closet</h1>
-            )}
+            <h1>My Closet</h1>
           </Title>
           <Row style={{ textAlign: "center" }}>
-            {!this.state.otherUser && this.state.userId ? (
+            {this.state.userId ? (
               <Col size="md-6">
                 <button
                   type="button"
@@ -144,35 +121,17 @@ class Closet extends Component {
                 </Row>
                 <Row>
                   <Col size="md-6" className="text-center">
-                    {this.state.otherUser && this.state.userId ? (
-                      <>
-                        <button
-                          type="button"
-                          className="btn btn-primary"
-                          onClick={event =>
-                            API.saveOutfit(this.state.userId, outfit).then(
-                              this.savedStyles(event)
-                            )
-                          }
-                        >
-                          SAVE
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <button
-                          type="button"
-                          className="btn btn-danger"
-                          onClick={() =>
-                            API.deleteOneOutfit(outfit._id).then(
-                              this.reloadOutfits()
-                            )
-                          }
-                        >
-                          REMOVE
-                        </button>
-                      </>
-                    )}
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={() =>
+                        API.deleteOneOutfit(outfit._id).then(
+                          this.reloadOutfits()
+                        )
+                      }
+                    >
+                      REMOVE
+                    </button>
                   </Col>
                   <Col size="md-6"></Col>
                 </Row>

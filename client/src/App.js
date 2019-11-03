@@ -9,6 +9,7 @@ import {
   useLocation
 } from "react-router-dom";
 import About from "./Views/About";
+import MyCloset from "./Views/MyCloset";
 import Closet from "./Views/Closet";
 import Home from "./Views/Home";
 import LogIn from "./Views/LogIn";
@@ -48,7 +49,7 @@ class App extends Component {
             <Route exact path="/About" component={About} />
             <Route exact path="/SignUp" component={SignUp} />
             <PrivateRoute exact path="/Home" component={Home} />
-            <PrivateRoute exact path="/MyCloset" component={Closet} />
+            <PrivateRoute exact path="/MyCloset" component={MyCloset} />
 
             <PrivateRoute exact path="/Closet" component={Closet} />
             <PrivateRoute

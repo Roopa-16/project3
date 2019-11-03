@@ -5,7 +5,7 @@ import { Col, Row, Container } from "../../Components/Grid";
 import ClothingItem from "../../Components/ClothingItem";
 import { getSession } from "../../utils/Session";
 
-import Title from "../../Components/TitleAnimation"
+import Title from "../../Components/TitleAnimation";
 const hardCodedUserId = "5db75b79c9e53d19ad99b030";
 let currentUser;
 
@@ -150,29 +150,35 @@ class Outfit extends Component {
     );
   };
 
-  saveOutfit = (userId, cb) => {
+  saveOutfit = userId => {
     let outfit = this.state.outfit;
     API.saveOutfit(userId, outfit);
-    cb();
   };
+
+  savedStyles(e) {
+    e.preventDefault();
+    console.log(e.target);
+    e.target.className = "btn btn-success";
+    e.target.innerHTML = "SAVED!";
+    e.target.style.pointerEvents = "none";
+  }
 
   render() {
     return (
       <Container>
-          <Title><h1>Your outfit!</h1></Title>
+        <Title>
+          <h1>Your outfit!</h1>
+        </Title>
         <Row className="justify-content-center">
           <Col size={"md-2"} className="text-center m-1">
             <button
               type="button"
-              class="btn btn-success"
-              onClick={() => {
-                this.createOutfit(() =>
-                  this.saveOutfit(this.state.userId, () =>
-                    alert(
-                      " Check out http://localhost:3001/api/users to see users with associated outfits. If you did not enter a hardcoded user ID in the Outfit view line 165, then this won't work. Create a user (sign up) first. Checkout http://localhost:3001/api/users to see users with associated outfits and their i."
-                    )
-                  )
-                );
+              class="btn btn-primary"
+              onClick={e => {
+                this.savedStyles(e);
+                this.createOutfit(() => {
+                  this.saveOutfit(this.state.userId);
+                });
               }}
             >
               SAVE OUTFIT
@@ -181,7 +187,7 @@ class Outfit extends Component {
           <Col size={"md-2"} className="text-center m-1">
             <button
               type="button"
-              class="btn btn-danger"
+              class="btn btn-warning"
               onClick={() => {
                 window.location.reload();
               }}

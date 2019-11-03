@@ -32,7 +32,7 @@ class ClosetFeed extends Component {
         ) : (
           ""
         )}
-        <hr></hr> */}
+        <hr></hr>
       </p>
     );
   }
