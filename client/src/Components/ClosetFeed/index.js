@@ -22,7 +22,7 @@ class ClosetFeed extends Component {
             outfitArray: this.state.outfitArray.concat(this.state.outfit)
           },
           () => {
-            console.log(Object.entries(this.state.outfit));
+            // console.log(Object.entries(this.state.outfit));
           }
         );
       } else {

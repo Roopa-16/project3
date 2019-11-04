@@ -21,7 +21,7 @@
 }
 
 .list-overflow-container {
-  max-height: 545px;
+  max-height: 100px;
   border: 1px #dddddd solid;
   border-radius: 4px;
   overflow-y: scroll;
