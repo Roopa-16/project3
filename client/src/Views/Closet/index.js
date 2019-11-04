@@ -2,45 +2,40 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../../Components/Grid";
 import ClothingItem from "../../Components/ClothingItem";
 import API from "../../utils/API";
-import { getSession, logOut } from "../../utils/Session";
+import { getSession } from "../../utils/Session";
 import Title from "../../Components/TitleAnimation";
+import { resolveAny } from "dns";
 
 class Closet extends Component {
   state = {
     outfits: [],
     user: "",
-    userId: "",
-    otherUser: undefined
+    currentUser: "",
+    newOutfit: ""
   };
 
   async componentDidMount() {
     let currentUser = await getSession();
-
+    API.getUser(currentUser.id).then(res => {
+      this.setState({ currentUser: res.data });
+    });
     if (this.props.match.params.id) {
       let otherUserId = this.props.match.params.id;
-      this.setState({ userId: currentUser.id }, () => {
-        this.reloadOutfits(otherUserId);
-        API.getUser(otherUserId).then(res => {
-          this.setState({ user: res.data, otherUser: true });
-        });
+      // set userID to current user... this.state.userId is passed in to the save outfit function when we save someone else's outfit
+
+      this.reloadOutfits(otherUserId);
+      API.getUser(otherUserId).then(res => {
+        this.setState({ user: res.data });
       });
+
       return;
-    } else if (currentUser) {
-      console.log(currentUser.id);
-      if (currentUser.id) {
-        this.setState({ userId: currentUser.id }, () => {
-          this.reloadOutfits(currentUser.id);
-          API.getUser(currentUser.id).then(res => {
-            this.setState({ user: res.data, otherUser: false });
-          });
-        });
-      }
-      return;
-    } else {
+    }
+    {
       console.log("better do this or else!");
     }
   }
 
+  // reloads outfits
   reloadOutfits = someId => {
     this.setState({ outfits: [] });
     API.getUser(someId)
@@ -55,6 +50,33 @@ class Closet extends Component {
       .catch(err => console.log(err));
   };
 
+  createNewOutfit = (outfit, cb) => {
+    let top = outfit.top._id;
+    let bottom = outfit.bottom._id;
+    let shoe = outfit.shoe._id;
+    let outerwear = outfit.outerwear._id;
+
+    this.setState(
+      state => ({
+        newOutfit: {
+          ...state.newOutfit,
+          top: top,
+          bottom: bottom,
+          shoe: shoe,
+          outerwear: outerwear,
+          user: this.state.currentUser._id
+        }
+      }),
+      () => cb()
+    );
+  };
+
+  saveOutfit = userId => {
+    let newOutfit = this.state.newOutfit;
+    API.saveOutfit(userId, newOutfit);
+  };
+
+  // simply changes the class and inner html of the SAVE button after it is clicked
   savedStyles(e) {
     e.preventDefault();
     console.log(e.target);
@@ -68,46 +90,8 @@ class Closet extends Component {
       <>
         <Container>
           <Title>
-            {this.state.otherUser === true ? (
-              <h1>{this.state.user.username}'s Closet</h1>
-            ) : (
-              <h1>My Closet</h1>
-            )}
+            <h1>{this.state.user.username}'s Closet</h1>
           </Title>
-          <Row style={{ textAlign: "center" }}>
-            {!this.state.otherUser && this.state.userId ? (
-              <Col size="md-6">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  onClick={() => {
-                    if (window.confirm("Are you sure?")) {
-                      API.deleteAllOutfitsFromUser(this.state.userId).then(() =>
-                        this.reloadOutfits()
-                      );
-                    } else {
-                    }
-                  }}
-                >
-                  Clean my closet
-                </button>
-              </Col>
-            ) : (
-              ""
-            )}
-
-            <Col size="md-6">
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={() =>
-                  API.deleteAllOutfits().then(this.reloadOutfits())
-                }
-              >
-                ADMIN delete all outfits from DB
-              </button>
-            </Col>
-          </Row>
           <Row className="justify-content-center">
             {" "}
             {this.state.outfits.map((outfit, index) => (
@@ -144,35 +128,18 @@ class Closet extends Component {
                 </Row>
                 <Row>
                   <Col size="md-6" className="text-center">
-                    {this.state.otherUser && this.state.userId ? (
-                      <>
-                        <button
-                          type="button"
-                          className="btn btn-primary"
-                          onClick={event =>
-                            API.saveOutfit(this.state.userId, outfit).then(
-                              this.savedStyles(event)
-                            )
-                          }
-                        >
-                          SAVE
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <button
-                          type="button"
-                          className="btn btn-danger"
-                          onClick={() =>
-                            API.deleteOneOutfit(outfit._id).then(
-                              this.reloadOutfits()
-                            )
-                          }
-                        >
-                          REMOVE
-                        </button>
-                      </>
-                    )}
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      onClick={e => {
+                        this.savedStyles(e);
+                        this.createNewOutfit(outfit, () => {
+                          this.saveOutfit(this.state.currentUser._id);
+                        });
+                      }}
+                    >
+                      SAVE OUTFIT
+                    </button>
                   </Col>
                   <Col size="md-6"></Col>
                 </Row>

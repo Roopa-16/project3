@@ -51,53 +51,37 @@ class Closet extends Component {
           <Title>
             <h1>My Closet</h1>
           </Title>
-          <Row style={{ textAlign: "center" }}>
-            {this.state.userId ? (
-              <Col size="md-6">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  onClick={() => {
-                    if (window.confirm("Are you sure?")) {
-                      API.deleteAllOutfitsFromUser(this.state.userId).then(() =>
-                        this.reloadOutfits()
-                      );
-                    } else {
-                    }
-                  }}
-                >
-                  Clean my closet
-                </button>
-              </Col>
-            ) : (
-              ""
-            )}
-
+          <Row
+            style={{ textAlign: "center" }}
+            className="justify-content-center"
+          >
             <Col size="md-6">
               <button
                 type="button"
-                className="btn btn-danger"
-                onClick={() =>
-                  API.deleteAllOutfits().then(this.reloadOutfits())
-                }
+                class="btn btn-danger"
+                onClick={() => {
+                  if (window.confirm("Are you sure?")) {
+                    API.deleteAllOutfitsFromUser(this.state.userId).then(() =>
+                      this.reloadOutfits(this.state.userId)
+                    );
+                  } else {
+                  }
+                }}
               >
-                ADMIN delete all outfits from DB
+                Clean my closet
               </button>
             </Col>
           </Row>
           <Row className="justify-content-center">
-            {" "}
             {this.state.outfits.map((outfit, index) => (
               <Col size="md-6">
                 <Row>
                   <Col size="md-6">
-                    {" "}
                     <ClothingItem
                       imageURL={outfit.top ? outfit.top.imageURL : ""}
                     />
                   </Col>
                   <Col size="md-6">
-                    {" "}
                     <ClothingItem
                       imageURL={outfit.bottom ? outfit.bottom.imageURL : ""}
                     />
@@ -105,7 +89,6 @@ class Closet extends Component {
                 </Row>
                 <Row>
                   <Col size="md-6">
-                    {" "}
                     <ClothingItem
                       imageURL={
                         outfit.outerwear ? outfit.outerwear.imageURL : ""
@@ -113,7 +96,6 @@ class Closet extends Component {
                     />
                   </Col>
                   <Col size="md-6">
-                    {" "}
                     <ClothingItem
                       imageURL={outfit.shoe ? outfit.shoe.imageURL : ""}
                     />
@@ -126,14 +108,13 @@ class Closet extends Component {
                       className="btn btn-danger"
                       onClick={() =>
                         API.deleteOneOutfit(outfit._id).then(
-                          this.reloadOutfits()
+                          this.reloadOutfits(this.state.userId)
                         )
                       }
                     >
                       REMOVE
                     </button>
                   </Col>
-                  <Col size="md-6"></Col>
                 </Row>
               </Col>
             ))}

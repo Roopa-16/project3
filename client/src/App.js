@@ -44,13 +44,12 @@ class App extends Component {
         <div>
           <Nav session={this.state.session} />
           <Switch>
-            <PrivateRoute exact path="/" component={Home} />
             <Route exact path="/LogIn" component={LogIn} />
             <Route exact path="/About" component={About} />
             <Route exact path="/SignUp" component={SignUp} />
+            <PrivateRoute exact path="/" component={Home} />
             <PrivateRoute exact path="/Home" component={Home} />
             <PrivateRoute exact path="/MyCloset" component={MyCloset} />
-
             <PrivateRoute exact path="/Closet" component={Closet} />
             <PrivateRoute
               exact

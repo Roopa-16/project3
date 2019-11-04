@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import Jumbotron from "../../Components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../Components/Grid";
 import ClothingItem from "../../Components/ClothingItem";
 import { getSession } from "../../utils/Session";
-
 import Title from "../../Components/TitleAnimation";
-const hardCodedUserId = "5db75b79c9e53d19ad99b030";
-let currentUser;
 
 class Outfit extends Component {
   state = {

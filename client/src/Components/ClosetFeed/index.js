@@ -4,36 +4,65 @@ import { Link } from "react-router-dom";
 import "./style.css";
 import API from "../../utils/API";
 class ClosetFeed extends Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-    subscribeToClosetFeed((err, res) =>
-      API.getOutfit(res._id)
-        .then(outfit => {
-          this.setState({
-            outfit: outfit.data
-          });
-        })
-        .catch(err => console.log(err))
-    );
+  state = {
+    outfit: false,
+    outfitArray: []
+  };
+
+  componentDidMount() {
+    subscribeToClosetFeed((err, res) => {
+      API.getOutfit(res._id).then(outfit => {
+        this.setState({
+          outfit: outfit.data
+        });
+      });
+      if (!this.state.outfitArray.some(e => e._id === this.state.outfit._id)) {
+        this.setState(
+          {
+            outfitArray: this.state.outfitArray.concat(this.state.outfit)
+          },
+          () => {
+            console.log(Object.entries(this.state.outfit));
+          }
+        );
+      } else {
+      }
+    });
   }
 
-  state = {
-    outfit: false
-  };
+  // componentDidUpdate() {
+  //   if (!this.state.outfitArray.some(e => e._id === this.state.outfit._id)) {
+  //     this.setState(
+  //       {
+  //         outfitArray: this.state.outfitArray.concat(this.state.outfit)
+  //       },
+  //       () => {}
+  //     );
+  //   } else {
+  //   }
+  // }
 
   render() {
     return (
-      <p className="feed">
-        {this.state.outfit ? (
-          <Link to={`/Closet/${this.state.outfit.user._id}/`}>
-            {this.state.outfit.user.username} saved a new outfit!
-          </Link>
-        ) : (
-          ""
-        )}
-        <hr></hr>
-      </p>
+      <>
+        <div className="list-overflow-container">
+          <ul className="list-group">
+            {this.state.outfitArray.map(outfit =>
+              Object.entries(outfit).map(entry =>
+                entry[0] === "user" ? (
+                  <li className="list-group-item">
+                    <Link to={`Closet/${entry[1]._id}`}>
+                      {entry[1].username} saved a new outfit!
+                    </Link>
+                  </li>
+                ) : (
+                  ""
+                )
+              )
+            )}
+          </ul>
+        </div>
+      </>
     );
   }
 }

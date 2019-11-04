@@ -1,4 +1,5 @@
 const axios = require("axios");
+const db = require("../models");
 
 // socket methods
 module.exports = {
@@ -11,10 +12,8 @@ module.exports = {
         }
       });
       let array = res.data;
-      // console.log(`here is the array, sock methods line 14 ${array}`);
+
       let newOutfit = array[array.length - 1];
-      // console.log(newOutfit);
-      // if no new book, then exit the function
       if (!newOutfit) {
         return;
       } else {
@@ -23,5 +22,15 @@ module.exports = {
     } catch (error) {
       console.log(`Error is ${error.message} error id is ${error.id}`);
     }
+  },
+  getMongoClosetFeed: function(req, res) {
+    db.ClosetFeed.find(req.query)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => console.log(err));
+  },
+  pushToMongoClosetFeed: function(req, res) {
+    db.ClosetFeed.create(req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => console.log(err));
   }
 };
