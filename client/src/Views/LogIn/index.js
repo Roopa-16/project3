@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import Jumbotron from "../../Components/Jumbotron";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Container, Row, Col } from "../../Components/Grid";
 import { Input, FormBtn } from "../../Components/Form";
 import API from "../../utils/API";
 import Cookies from "js-cookie";
 import LoginModal from "../../Components/LoginModal";
 import Title from "../../Components/TitleAnimation";
-import { runInThisContext } from "vm";
 
 class LogIn extends Component {
   state = {
@@ -17,7 +15,6 @@ class LogIn extends Component {
   };
 
   componentDidMount() {
-    // this.setState({ isAuthed: undefined });
     let cookie = Cookies.get("userToken");
     console.log(cookie);
   }
@@ -29,17 +26,10 @@ class LogIn extends Component {
         if (response.data.token) {
           Cookies.set("userToken", response.data.token);
         }
-        alert(response.data.message);
         if (response.data.isAuthed === true) {
           window.location.replace("/");
         }
-        // if (response.data.isAuthed === false) {
-        //   this.setState({ isAuthed: false });
-        // } else if (response.data.isAuthed === true) {
-        //   this.setState({ isAuthed: true });
-        // }
       })
-      // .then(window.location.replace("/"))
       .catch(function(error) {
         console.log(error);
       });
@@ -108,20 +98,6 @@ class LogIn extends Component {
               Don't have an account?
               <br />
               <Link to="/SignUp"> Sign Up Here</Link>{" "}
-              <button
-                onClick={() =>
-                  API.removeAllUsers().then(res => console.log(res))
-                }
-              >
-                ADMIN remove all users
-              </button>
-              <button
-                onClick={() =>
-                  API.deleteAllOutfits().then(res => console.log(res))
-                }
-              >
-                ADMIN remove all outfits
-              </button>
             </p>
           </Col>
         </Row>
