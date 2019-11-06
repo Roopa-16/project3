@@ -40,7 +40,7 @@ function Nav(props) {
                   }
                   to="/MyCloset"
                 >
-                  <div className="NavLinks">Closet</div>
+                  <div className="NavLinks">My Closet</div>
                 </Link>
               </li>
               <li className="nav-item">

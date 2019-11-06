@@ -4,7 +4,7 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "../../Components/Grid";
 import { Input, FormBtn } from "../../Components/Form";
-import Title from "../../Components/TitleAnimation"
+import Title from "../../Components/TitleAnimation";
 
 class LogIn extends Component {
   state = {
@@ -37,7 +37,9 @@ class LogIn extends Component {
       .then(function(response) {
         console.log(response);
         alert(response.data.message);
-        window.location.replace("/LogIn");
+        if (response.data.success) {
+          window.location.replace("/LogIn");
+        }
       })
       .catch(function(error) {
         console.log(error);
@@ -79,9 +81,9 @@ class LogIn extends Component {
   render() {
     return (
       <Container>
-    <Title>
+        <Title>
           <h1>Sign Up</h1>
-    </Title>
+        </Title>
         <br />
         <Row className="justify-content-center">
           <Col size="md-6">
@@ -115,7 +117,7 @@ class LogIn extends Component {
                 }
                 onClick={this.checkFormSubmit}
               >
-                Log in
+                CREATE ACCOUNT
               </FormBtn>
             </form>
             <p>

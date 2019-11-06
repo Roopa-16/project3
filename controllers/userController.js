@@ -48,7 +48,8 @@ module.exports = {
                               username: dbUser.username,
                               password: dbUser.password,
                               token,
-                              message: "Welcome to stylefish!"
+                              message: "Welcome to stylefish!",
+                              success: true
                             });
                           }
                         );

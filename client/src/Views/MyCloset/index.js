@@ -4,38 +4,32 @@ import ClothingItem from "../../Components/ClothingItem";
 import API from "../../utils/API";
 import { getSession } from "../../utils/Session";
 import Title from "../../Components/TitleAnimation";
-import { resolveAny } from "dns";
 
 class Closet extends Component {
   state = {
     outfits: [],
     user: "",
-    currentUser: "",
-    newOutfit: ""
+    userId: ""
   };
 
   async componentDidMount() {
     let currentUser = await getSession();
-    API.getUser(currentUser.id).then(res => {
-      this.setState({ currentUser: res.data });
-    });
-    if (this.props.match.params.id) {
-      let otherUserId = this.props.match.params.id;
-      // set userID to current user... this.state.userId is passed in to the save outfit function when we save someone else's outfit
-
-      this.reloadOutfits(otherUserId);
-      API.getUser(otherUserId).then(res => {
-        this.setState({ user: res.data });
-      });
-
+    if (currentUser) {
+      console.log(currentUser.id);
+      if (currentUser.id) {
+        this.setState({ userId: currentUser.id }, () => {
+          this.reloadOutfits(currentUser.id);
+          API.getUser(currentUser.id).then(res => {
+            this.setState({ user: res.data, otherUser: false });
+          });
+        });
+      }
       return;
-    }
-    {
+    } else {
       console.log("better do this or else!");
     }
   }
 
-  // reloads outfits
   reloadOutfits = someId => {
     this.setState({ outfits: [] });
     API.getUser(someId)
@@ -50,61 +44,44 @@ class Closet extends Component {
       .catch(err => console.log(err));
   };
 
-  createNewOutfit = (outfit, cb) => {
-    let top = outfit.top._id;
-    let bottom = outfit.bottom._id;
-    let shoe = outfit.shoe._id;
-    let outerwear = outfit.outerwear._id;
-
-    this.setState(
-      state => ({
-        newOutfit: {
-          ...state.newOutfit,
-          top: top,
-          bottom: bottom,
-          shoe: shoe,
-          outerwear: outerwear,
-          user: this.state.currentUser._id
-        }
-      }),
-      () => cb()
-    );
-  };
-
-  saveOutfit = userId => {
-    let newOutfit = this.state.newOutfit;
-    API.saveOutfit(userId, newOutfit);
-  };
-
-  // simply changes the class and inner html of the SAVE button after it is clicked
-  savedStyles(e) {
-    e.preventDefault();
-    console.log(e.target);
-    e.target.className = "btn btn-success";
-    e.target.innerHTML = "SAVED!";
-    e.target.style.pointerEvents = "none";
-  }
-
   render() {
     return (
       <>
         <Container>
           <Title>
-            <h1>{this.state.user.username}'s Closet</h1>
+            <h1>My Closet</h1>
           </Title>
+          <Row
+            style={{ textAlign: "center" }}
+            className="justify-content-center"
+          >
+            <Col size="md-6">
+              <button
+                type="button"
+                class="btn btn-danger"
+                onClick={() => {
+                  if (window.confirm("Are you sure?")) {
+                    API.deleteAllOutfitsFromUser(this.state.userId).then(() =>
+                      this.reloadOutfits(this.state.userId)
+                    );
+                  } else {
+                  }
+                }}
+              >
+                Clean my closet
+              </button>
+            </Col>
+          </Row>
           <Row className="justify-content-center">
-            {" "}
             {this.state.outfits.map((outfit, index) => (
               <Col size="md-6">
                 <Row>
                   <Col size="md-6">
-                    {" "}
                     <ClothingItem
                       imageURL={outfit.top ? outfit.top.imageURL : ""}
                     />
                   </Col>
                   <Col size="md-6">
-                    {" "}
                     <ClothingItem
                       imageURL={outfit.bottom ? outfit.bottom.imageURL : ""}
                     />
@@ -112,7 +89,6 @@ class Closet extends Component {
                 </Row>
                 <Row>
                   <Col size="md-6">
-                    {" "}
                     <ClothingItem
                       imageURL={
                         outfit.outerwear ? outfit.outerwear.imageURL : ""
@@ -120,7 +96,6 @@ class Closet extends Component {
                     />
                   </Col>
                   <Col size="md-6">
-                    {" "}
                     <ClothingItem
                       imageURL={outfit.shoe ? outfit.shoe.imageURL : ""}
                     />
@@ -130,18 +105,16 @@ class Closet extends Component {
                   <Col size="md-6" className="text-center">
                     <button
                       type="button"
-                      class="btn btn-primary"
-                      onClick={e => {
-                        this.savedStyles(e);
-                        this.createNewOutfit(outfit, () => {
-                          this.saveOutfit(this.state.currentUser._id);
-                        });
-                      }}
+                      className="btn btn-danger"
+                      onClick={() =>
+                        API.deleteOneOutfit(outfit._id).then(
+                          this.reloadOutfits(this.state.userId)
+                        )
+                      }
                     >
-                      SAVE OUTFIT
+                      REMOVE
                     </button>
                   </Col>
-                  <Col size="md-6"></Col>
                 </Row>
               </Col>
             ))}
