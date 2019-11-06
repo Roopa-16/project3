@@ -32,6 +32,8 @@ class App extends Component {
 
   componentDidMount() {
     let obj = getSession();
+    console.log(`hjey this is the 36 token ${obj}`);
+
     if (obj) {
       console.log(obj.id);
       this.setState({ session: obj.id });

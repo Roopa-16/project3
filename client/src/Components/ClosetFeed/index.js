@@ -3,6 +3,7 @@ import { subscribeToClosetFeed } from "../../utils/ClosetFeed";
 import { Link } from "react-router-dom";
 import "./style.css";
 import API from "../../utils/API";
+import { timingSafeEqual } from "crypto";
 class ClosetFeed extends Component {
   state = {
     outfit: false,
@@ -10,37 +11,43 @@ class ClosetFeed extends Component {
   };
 
   componentDidMount() {
+    API.getMongoClosetFeed()
+      .then(res => {
+        console.log(`res on 16 ${res}`);
+        this.setState({ outfitArray: res.data });
+      })
+      .catch(err => console.log(err));
     subscribeToClosetFeed((err, res) => {
-      API.getOutfit(res._id).then(outfit => {
-        this.setState({
-          outfit: outfit.data
-        });
-      });
-      if (!this.state.outfitArray.some(e => e._id === this.state.outfit._id)) {
-        this.setState(
-          {
-            outfitArray: this.state.outfitArray.concat(this.state.outfit)
-          },
-          () => {
-            // console.log(Object.entries(this.state.outfit));
-          }
-        );
-      } else {
-      }
+      API.getOutfit(res._id)
+        .then(outfit => {
+          this.setState({
+            outfit: outfit.data
+          });
+        })
+        .catch(err => console.log(err));
     });
   }
 
-  // componentDidUpdate() {
-  //   if (!this.state.outfitArray.some(e => e._id === this.state.outfit._id)) {
-  //     this.setState(
-  //       {
-  //         outfitArray: this.state.outfitArray.concat(this.state.outfit)
-  //       },
-  //       () => {}
-  //     );
-  //   } else {
-  //   }
-  // }
+  componentDidUpdate() {
+    if (!this.state.outfitArray.some(e => e._id === this.state.outfit._id)) {
+      // API.addToClosetFeed({
+      //   top: this.state.outfit.top,
+      //   bottom: this.state.outfit.bottom,
+      //   outerwear: this.state.outfit.outerwear,
+      //   shoe: this.state.outfit.shoe._id,
+      //   user: this.state.outfit.user._id
+      // })
+      //   .then(res => {
+      //     console.log(res);
+      //   })
+      //   .catch(err => console.log(err));
+
+      this.setState({
+        outfitArray: this.state.outfitArray.concat(this.state.outfit)
+      });
+    } else {
+    }
+  }
 
   render() {
     return (
