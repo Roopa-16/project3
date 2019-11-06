@@ -4,7 +4,6 @@ import ClothingItem from "../../Components/ClothingItem";
 import API from "../../utils/API";
 import { getSession } from "../../utils/Session";
 import Title from "../../Components/TitleAnimation";
-import { resolveAny } from "dns";
 
 class Closet extends Component {
   state = {
@@ -16,14 +15,21 @@ class Closet extends Component {
 
   async componentDidMount() {
     let currentUser = await getSession();
+    // if the user somehow made it to this page but should be going to their own closet
+    if (currentUser.id === this.props.match.params.id) {
+      window.location.replace("/MyCloset");
+    }
+    // sets the current user in state
     API.getUser(currentUser.id).then(res => {
       this.setState({ currentUser: res.data });
     });
+
     if (this.props.match.params.id) {
       let otherUserId = this.props.match.params.id;
-      // set userID to current user... this.state.userId is passed in to the save outfit function when we save someone else's outfit
-
+      // set otherUserId to user id in url params... this.state.currentUser is passed in to the save outfit function when we save someone else's outfit
+      // load other users outfits, since we are looking at someone elses closet
       this.reloadOutfits(otherUserId);
+      // get other users data
       API.getUser(otherUserId).then(res => {
         this.setState({ user: res.data });
       });
@@ -42,7 +48,6 @@ class Closet extends Component {
       .then(response => {
         response.data.outfits.map(el => {
           API.getOutfit(el._id).then(res => {
-            console.log(res.data);
             this.setState({ outfits: this.state.outfits.concat([res.data]) });
           });
         });
@@ -79,7 +84,6 @@ class Closet extends Component {
   // simply changes the class and inner html of the SAVE button after it is clicked
   savedStyles(e) {
     e.preventDefault();
-    console.log(e.target);
     e.target.className = "btn btn-success";
     e.target.innerHTML = "SAVED!";
     e.target.style.pointerEvents = "none";

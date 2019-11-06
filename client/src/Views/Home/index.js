@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import Jumbotron from "../../Components/Jumbotron";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../Components/Grid";
 import ClothingItem from "../../Components/ClothingItem";
 import ClosetFeed from "../../Components/ClosetFeed";
 import Title from "../../Components/TitleAnimation";
-import Cookies from "js-cookie";
 
 import "./style.css";
 
@@ -20,10 +18,6 @@ class Home extends Component {
 
   componentDidMount() {
     this.loadClothes();
-    let cookie = Cookies.get("userToken");
-    console.log(
-      `hey here is your cookie which is the JWT as well :) : ${cookie}`
-    );
   }
 
   loadClothes = () => {
@@ -44,11 +38,16 @@ class Home extends Component {
   render() {
     return (
       <Container fluid>
-        <Title>
-          <h1>StyleFish</h1>
-        </Title>
         <Row className="justify-content-center">
-          <ClosetFeed />
+          <Col size="md-3" className="justify-content-center m-auto">
+            <ClosetFeed />
+          </Col>
+          <Col size="md-6">
+            <Title>
+              <h1>StyleFish</h1>
+            </Title>
+          </Col>
+          <Col size="md-3"></Col>
         </Row>
         <Row className="justify-content-center">
           <p>

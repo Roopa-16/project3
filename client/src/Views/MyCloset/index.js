@@ -15,7 +15,6 @@ class Closet extends Component {
   async componentDidMount() {
     let currentUser = await getSession();
     if (currentUser) {
-      console.log(currentUser.id);
       if (currentUser.id) {
         this.setState({ userId: currentUser.id }, () => {
           this.reloadOutfits(currentUser.id);
