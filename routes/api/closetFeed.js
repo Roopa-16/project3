@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const closetFeedController = require("../../controllers/sockMethods");
+const closetFeedController = require("../../controllers/closetFeedController");
 
 router.route("/").get(closetFeedController.getMongoClosetFeed);
 router.route("/").post(closetFeedController.pushToMongoClosetFeed);

@@ -49,6 +49,10 @@ module.exports = {
       .catch(err => console.log(err));
   },
   pushToMongoClosetFeed: function(req, res) {
+    console.log("\n\nthis is push to mongo closet feed in the controller\n\n");
+    console.log(req.body);
+    console.log("\n\nthis is push to mongo closet feed in the controller\n\n");
+
     db.ClosetFeed.create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => console.log(err));

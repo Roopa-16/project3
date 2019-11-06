@@ -29,6 +29,9 @@ var ClosetFeedSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User"
+  },
+  key: {
+    type: String
   }
 
   // The ref property links the ObjectId to the Outfit model

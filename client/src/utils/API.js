@@ -75,7 +75,7 @@ export default {
   getMongoClosetFeed: function() {
     return axios.get(`/api/closetFeed`);
   },
-  addToClosetFeed: function() {
-    return axios.post(`/api/closetFeed`);
+  addToClosetFeed: function(outfitObj) {
+    return axios.post(`/api/closetFeed`, outfitObj);
   }
 };
