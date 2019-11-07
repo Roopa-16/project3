@@ -22,10 +22,6 @@ class LogIn extends Component {
     });
   };
 
-  // handleFormSubmit = () => {
-
-  // }
-
   validateEmail = email => {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -35,7 +31,6 @@ class LogIn extends Component {
     console.log(userObj);
     API.createUser(userObj)
       .then(function(response) {
-        console.log(response);
         alert(response.data.message);
         if (response.data.success) {
           window.location.replace("/LogIn");

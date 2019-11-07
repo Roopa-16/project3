@@ -11,24 +11,22 @@ var ClosetFeedSchema = new Schema({
     default: ""
   },
   top: {
-    type: Schema.Types.ObjectId,
-    ref: "Top"
+    type: Schema.Types.Mixed
   },
   bottom: {
-    type: Schema.Types.ObjectId,
-    ref: "Bottom"
+    type: Schema.Types.Mixed
   },
   shoe: {
-    type: Schema.Types.ObjectId,
-    ref: "Shoe"
+    type: Schema.Types.Mixed
   },
   outerwear: {
-    type: Schema.Types.ObjectId,
-    ref: "Outerwear"
+    type: Schema.Types.Mixed
   },
   user: {
-    type: Schema.Types.ObjectId,
-    ref: "User"
+    type: Schema.Types.Mixed
+  },
+  key: {
+    type: String
   }
 
   // The ref property links the ObjectId to the Outfit model
