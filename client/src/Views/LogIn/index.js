@@ -27,7 +27,10 @@ class LogIn extends Component {
           Cookies.set("userToken", response.data.token);
         }
         if (response.data.isAuthed === true) {
+          alert(response.data.message);
           window.location.replace("/");
+        } else {
+          alert(response.data.message);
         }
       })
       .catch(function(error) {
