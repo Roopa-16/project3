@@ -79,7 +79,7 @@ class ClosetFeed extends Component {
       <>
         <div className="list-overflow-container">
           <ul className="list-group">
-            {this.state.outfitArray.length > 1
+            {this.state.outfitArray.length
               ? this.state.outfitArray
                   .slice(0)
                   .reverse()
