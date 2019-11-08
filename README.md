@@ -7,12 +7,12 @@ StyleFish is a MERN-stack application for folks who want to up their fashion gam
 - MERN (Mongoose, Express, React, Node)
 - JWT
 - Socket.io
+- Axios
 - MDB (Bootstrap UI Kit and Animations)
--
 
-## Starting the app lo
+## Starting the app locally
 
-Start by installing front and backend dependencies. While in this directory, run the following command:
+Git clone and while in the root directory, run the following command:
 
 ```
 npm install
@@ -27,7 +27,3 @@ npm start
 ```
 
 Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
-
-## Deployment (Heroku)
-
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
